@@ -6,6 +6,14 @@ export default function BookItem(props: BookItemProps) {
 
     const { book } = props;
 
+    function handleEditBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        console.log(e);
+    }
+
+    function handleDeleteBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+        console.log(e);
+    }
+
     return (
         <div className='font-poppins w-[400px] h-[280px] relative shadow-md bg-slate-100'>
             <div className='absolute shadow-md left-[15px] -top-[20px] max-h-[280px] overflow-hidden'>
@@ -28,8 +36,12 @@ export default function BookItem(props: BookItemProps) {
                 </div>
 
                 <div className='self-end flex gap-2'>
-                    <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
-                    <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
+                    <button onClick={handleEditBook}>
+                        <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                    </button>
+                    <button onClick={handleDeleteBook}>
+                        <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
+                    </button>
                 </div>
             </div>
         </div>
