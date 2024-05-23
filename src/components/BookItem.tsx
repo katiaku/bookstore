@@ -2,7 +2,7 @@
 
 export default function BookItem() {
     return (
-        <div className='font-poppins w-[400px] h-[280px] relative shadow-md'>
+        <div className='font-poppins w-[400px] h-[280px] relative shadow-md bg-slate-100'>
             <div className='absolute shadow-md left-[15px] -top-[20px]'>
                 <img src="../../public/img/portada-el-perfume.jpg" alt="Portada del libro El Perfume" width="170" />
             </div>

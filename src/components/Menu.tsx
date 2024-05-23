@@ -1,9 +1,9 @@
 export default function Menu() {
     return (
-        <nav className="flex w-1/2 mx-auto justify-between font-bold uppercase font-poppins">
-            <a href="#" className="text-blue-950 hover:text-orange-400 transition-all ease-in-out duration-300">Home</a>
-            <a href="#" className="text-blue-950 hover:text-orange-400 transition-all ease-in-out duration-300">Libros</a>
-            <a href="#" className="text-blue-950 hover:text-orange-400 transition-all ease-in-out duration-300">Log In</a>
+        <nav className="flex w-1/2 h-full mx-auto justify-center items-center font-bold uppercase font-poppins">
+            <a href="#" className="h-full px-20 flex items-center justify-center text-blue-950 transition-all ease-in-out duration-300 hover:bg-orange-400 hover:text-white">Home</a>
+            <a href="#" className="h-full px-20 flex items-center justify-center text-blue-950 transition-all ease-in-out duration-300 hover:bg-orange-400 hover:text-white">Libros</a>
+            <a href="#" className="h-full px-20 flex items-center justify-center text-blue-950 transition-all ease-in-out duration-300 hover:bg-orange-400 hover:text-white">Login</a>
         </nav>
     )
 }
