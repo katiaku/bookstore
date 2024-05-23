@@ -8,4 +8,11 @@ type Book = {
     type: string;
 };
 
-export type { Book };
+type BookItemProps = {
+    book: Book
+}
+
+export type {
+    Book,
+    BookItemProps
+};
