@@ -1,5 +1,5 @@
 export default function Logo() {
     return (
-        <img src="../../public/img/bookstore-logo.png" alt="BookStore logo" width="150" />
+        <img src="../../public/img/bookstore-logo.png" alt="BookStore logo" width="70" />
     )
 }
