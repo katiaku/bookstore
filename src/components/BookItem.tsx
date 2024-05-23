@@ -1,4 +1,5 @@
 // import styles from './bookItem.module.css';
+import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 
 export default function BookItem() {
     return (
@@ -18,8 +19,9 @@ export default function BookItem() {
                     <span>19.9€</span>
                 </div>
 
-                <div className='self-end'>
-                    Icons
+                <div className='self-end flex gap-2'>
+                    <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                    <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
                 </div>
             </div>
         </div>
