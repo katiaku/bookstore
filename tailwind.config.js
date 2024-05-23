@@ -5,7 +5,11 @@ export default {
     "./src/**/*.tsx",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        poppins: "Poppins"
+      }
+    },
   },
   plugins: [],
 }

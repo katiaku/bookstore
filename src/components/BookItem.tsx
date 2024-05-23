@@ -1,25 +1,27 @@
+import styles from './bookItem.module.css';
+
 export default function BookItem() {
     return (
-        <>
-            <div>
-                <img src="../../public/img/portada-el-perfume.jpg" alt="Portada del libro El Perfume" />
+        <div className={styles.container}>
+            <div className={styles.imgWrapper}>
+                <img src="../../public/img/portada-el-perfume.jpg" alt="Portada del libro El Perfume" width="170" />
             </div>
 
-            <div>
+            <div className={styles.contentWrapper}>
                 <div>
-                    <p>El Perfume</p>
+                    <p className={styles.title}>El Perfume</p>
+                    <p className={styles.author}>Patrick Suskind</p>
+                    <p className={styles.genre}>Novela</p>
                 </div>
-                <div>
-                    <p>Patrick Suskind</p>
-                    <div>Novela</div>
-                </div>
-                <div>
+
+                <div className={styles.price}>
                     <span>19.9€</span>
-                    <div>
-                        Icons
-                    </div>
+                </div>
+
+                <div className={styles.icons}>
+                    Icons
                 </div>
             </div>
-        </>
+        </div>
     )
 }
