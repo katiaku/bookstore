@@ -6,11 +6,11 @@ import BooksPage from './pages/BooksPage'
 function App() {
 
   return (
-    <>
+    <div>
       <Header />
       <BooksPage />
       <Footer />
-    </>
+    </div>
   )
 }
 
