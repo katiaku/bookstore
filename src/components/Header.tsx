@@ -3,6 +3,7 @@ import Logo from "./Logo";
 import Menu from "./Menu";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Header() {
 
@@ -22,7 +23,21 @@ export default function Header() {
             >
                 <GiHamburgerMenu />
             </button>
-            {isOpenSidebar && <Sidebar isOpenSidebar={isOpenSidebar} />}
+
+            <AnimatePresence>
+                {
+                    isOpenSidebar 
+                && 
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ ease: "easeInOut", duration: 0.5 }}
+                    >
+                        <Sidebar isOpenSidebar={isOpenSidebar} />
+                    </motion.div>
+                }
+            </AnimatePresence>
         </div>
     )
 }
