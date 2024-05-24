@@ -7,12 +7,12 @@ import BooksPage from './pages/BooksPage'
 function App() {
 
   return (
-    <div>
+    <>
       <Header />
       <BooksPage />
       {/* <HomePage /> */}
       <Footer />
-    </div>
+    </>
   )
 }
 
