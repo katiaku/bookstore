@@ -12,7 +12,12 @@ type BookItemProps = {
     book: Book
 }
 
+type SidebarProps = {
+    isOpenSidebar?: boolean;
+}
+
 export type {
     Book,
-    BookItemProps
+    BookItemProps,
+    SidebarProps
 };
