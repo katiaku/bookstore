@@ -1,4 +1,5 @@
-import { GiHamburgerMenu } from "react-icons/gi"; 
+import { RxHamburgerMenu } from "react-icons/rx"; 
+import { AiOutlineClose } from "react-icons/ai"; 
 import Logo from "./Logo";
 import Menu from "./Menu";
 import { useState } from "react";
@@ -21,7 +22,7 @@ export default function Header() {
                 className="md:hidden font-bold text-4xl text-blue-950 ml-auto mr-2"
                 onClick={() => setIsOpenSidebar(!isOpenSidebar)}
             >
-                <GiHamburgerMenu />
+                {isOpenSidebar ? <AiOutlineClose /> : <RxHamburgerMenu /> }
             </button>
 
             <AnimatePresence>
