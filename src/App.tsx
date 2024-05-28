@@ -11,11 +11,12 @@ import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
 import PrivateRoutes from './components/PrivateRoutes'
 import PublicRoutes from './components/PublicRoutes'
+// import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
 
-  // const user = null;
-  const user = "user";
+  const user = null;
+  // const user = "user";
 
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
 
         {user && <Route element={<PrivateRoutes user={user} />}>
           <Route path='/profile' element={<ProfilePage />} />
+          {/* <Route path='/profile/edit' element={<EditProfilePage />} /> */}
           <Route path='/books' element={<BooksPage />} />
           <Route path='/add-book' element={<AddBookPage />} />
           <Route path='/edit-book' element={<EditBookPage />} />
