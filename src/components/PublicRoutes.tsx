@@ -4,11 +4,6 @@ export default function PublicRoutes() {
 
     const user = null;
 
-    // return (
-    //     <>
-    //         <Outlet />
-    //     </>
-    // )
     if(!user) return <Outlet />
     return <Navigate to="/" />
 }
