@@ -10,11 +10,12 @@ type Book = {
 
 type BookItemProps = {
     book: Book
-}
+};
 
 type SidebarProps = {
     isOpenSidebar?: boolean;
-}
+    user: string;
+};
 
 export type {
     Book,

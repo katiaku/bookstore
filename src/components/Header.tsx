@@ -6,7 +6,7 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function Header() {
+export default function Header({ user }) {
 
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
@@ -15,7 +15,7 @@ export default function Header() {
             <Logo />
 
             <div className="hidden md:block h-full w-full">
-                <Menu />
+                <Menu user={user} />
             </div>
 
             <button
@@ -35,7 +35,7 @@ export default function Header() {
                         exit={{ opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.5 }}
                     >
-                        <Sidebar isOpenSidebar={isOpenSidebar} />
+                        <Sidebar isOpenSidebar={isOpenSidebar} user={user} />
                     </motion.div>
                 }
             </AnimatePresence>
