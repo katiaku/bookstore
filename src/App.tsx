@@ -14,8 +14,8 @@ import PublicRoutes from './components/PublicRoutes'
 
 function App() {
 
-  const user = null;
-  // const user = "user";
+  // const user = null;
+  const user = "user";
 
   return (
     <>
