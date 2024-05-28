@@ -14,7 +14,7 @@ export default function BookItem(props: BookItemProps) {
     }
 
     return (
-        <div className='font-poppins w-full md:w-[400px] h-[280px] relative shadow-md bg-slate-100'>
+        <div className='cursor-default font-poppins w-full md:w-[400px] h-[280px] relative shadow-md bg-slate-100'>
             <div className='absolute shadow-md left-[15px] -top-[20px] max-h-[280px] overflow-hidden'>
                 <img
                     src={ book.photo }

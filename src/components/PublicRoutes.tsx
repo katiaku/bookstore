@@ -1,13 +1,14 @@
 import { Navigate, Outlet } from "react-router-dom";
 
-export default function PublicRoutes({ user }) {
+export default function PublicRoutes() {
+
+    const user = null;
+
     // return (
     //     <>
     //         <Outlet />
     //     </>
     // )
-    if(user) {
-        return <Navigate to="/" />
-    }
-    return <Outlet />
+    if(!user) return <Outlet />
+    return <Navigate to="/" />
 }

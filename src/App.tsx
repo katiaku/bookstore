@@ -11,33 +11,30 @@ import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
 import PrivateRoutes from './components/PrivateRoutes'
 import PublicRoutes from './components/PublicRoutes'
-// import EditProfilePage from './pages/EditProfilePage'
+import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
 
-  const user = null;
-  // const user = "user";
-
   return (
     <>
-      <Header user={user} />
+      <Header />
 
       <Routes>
         <Route path='/' element={<HomePage />} />
 
-        {!user && <Route element={<PublicRoutes user={user} />}>
+        <Route element={<PublicRoutes />}>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
-        </Route>}
+        </Route>
 
-        {user && <Route element={<PrivateRoutes user={user} />}>
-          <Route path='/profile' element={<ProfilePage />} />
-          {/* <Route path='/profile/edit' element={<EditProfilePage />} /> */}
+        <Route element={<PrivateRoutes />}>
+          <Route path='/profile' element={<ProfilePage />}>
+            <Route path='edit' element={<EditProfilePage />} />
+          </Route>
           <Route path='/books' element={<BooksPage />} />
           <Route path='/add-book' element={<AddBookPage />} />
           <Route path='/edit-book' element={<EditBookPage />} />
-        </Route>}
-
+        </Route>
       </Routes>
 
       <Footer />
