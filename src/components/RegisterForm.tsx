@@ -12,8 +12,7 @@ export default function RegisterForm() {
     });
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const { firstName, lastName, email, photo, password, confirmPassword } = event.target;
-        setFormValues({ ...formValues, [name]: value });
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
         console.log(formValues);
     }
 
@@ -90,6 +89,7 @@ export default function RegisterForm() {
                 <input
                     type="password"
                     id="password"
+                    minLength={8}
                     placeholder="12345678"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
                     value={formValues.password}
@@ -106,6 +106,7 @@ export default function RegisterForm() {
                 <input
                     type="password"
                     id="confirmPassword"
+                    minLength={8}
                     placeholder="12345678"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
                     value={formValues.confirmPassword}

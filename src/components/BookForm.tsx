@@ -11,8 +11,7 @@ export default function BookForm() {
     });
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const { title, author, type, photo, price } = event.target;
-        setFormValues({ ...formValues, [name]: value });
+        setFormValues({ ...formValues, [event.target.name]: event.target.value });
         console.log(formValues);
     }
 
