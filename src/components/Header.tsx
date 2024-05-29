@@ -6,18 +6,18 @@ import { useState } from "react";
 import Sidebar from "./Sidebar";
 import { AnimatePresence, motion } from "framer-motion";
 
-export default function Header({ user }) {
+export default function Header() {
 
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
     return (
-        <div className="relative z-20 flex items-center px-4 md:px-10 h-[70px] bg-white">
+        <div className="relative z-20 flex items-center px-4 lg:px-10 h-[70px] bg-white">
             <Logo />
 
-            <p className="font-nunito text-2xl md:text-md lg:text-2xl font-bold pl-2 text-blue-950"><span className="text-orange-400">B</span>ook<span className="text-orange-400">S</span>tore</p>
+            <p className="font-nunito text-2xl md:text-md lg:text-2xl font-bold pl-2 text-blue-950 mr-4"><span className="text-orange-400">B</span>ook<span className="text-orange-400">S</span>tore</p>
 
             <div className="hidden md:block h-full w-full">
-                <Menu user={user} />
+                <Menu />
             </div>
 
             <button
@@ -37,7 +37,7 @@ export default function Header({ user }) {
                         exit={{ opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.5 }}
                     >
-                        <Sidebar isOpenSidebar={isOpenSidebar} user={user} />
+                        <Sidebar isOpenSidebar={isOpenSidebar} />
                     </motion.div>
                 }
             </AnimatePresence>

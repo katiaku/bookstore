@@ -14,7 +14,6 @@ type BookItemProps = {
 
 type SidebarProps = {
     isOpenSidebar?: boolean;
-    user: string;
 };
 
 export type {
