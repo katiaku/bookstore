@@ -1,28 +1,50 @@
+import { useState } from "react";
+
 export default function EditProfileForm() {
+
+    const [formValues, setFormValues] = useState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        photo: ''
+    });
+
+    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+        const { firstName, lastName, email, photo } = event.target;
+        setFormValues({ ...formValues, [name]: value });
+        console.log(formValues);
+    }
+    
     return (
         <form className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200">
             <div className="flex flex-col">
-                <label htmlFor="name" className="text-sm font-semibold">
-                    Name:
+                <label htmlFor="firstName" className="text-sm font-semibold">
+                    First Name:
                 </label>
                 <input
                     type="text"
-                    id="name"
+                    id="firstName"
                     placeholder="John"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    value={formValues.firstName}
+                    name="firstName"
+                    onChange={handleInputChange}
                 />
                 <div className="h-4"></div>
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="surname" className="text-sm font-semibold">
-                    Surname:
+                <label htmlFor="lastName" className="text-sm font-semibold">
+                    Last Name:
                 </label>
                 <input
                     type="text"
-                    id="surname"
+                    id="lastName"
                     placeholder="Doe"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    value={formValues.lastName}
+                    name="lastName"
+                    onChange={handleInputChange}
                 />
                 <div className="h-4"></div>
             </div>
@@ -36,6 +58,9 @@ export default function EditProfileForm() {
                     id="email"
                     placeholder="email@email.com"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    value={formValues.email}
+                    name="email"
+                    onChange={handleInputChange}
                 />
                 <div className="h-4"></div>
             </div>
@@ -49,6 +74,9 @@ export default function EditProfileForm() {
                     id="photo"
                     placeholder="https://photo.jpg"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    value={formValues.photo}
+                    name="photo"
+                    onChange={handleInputChange}
                 />
                 <div className="h-4"></div>
             </div>
