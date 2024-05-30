@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { User } from "../config/types";
 
 type FormValues = {
     firstName: string,
@@ -26,14 +27,41 @@ export default function RegisterForm() {
     //     console.log(formValues);
     // }
 
-    const { register, handleSubmit, formState, watch } = useForm<FormValues>({
+    const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
         mode: "onSubmit"
     });
 
     const { errors } = formState;
 
+    let newUser: User | null = null;
+
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
+
+        newUser = data;
+        handleSubmitUser(newUser);
+        reset();
+    }
+
+    function handleSubmitUser(submitData: User) {
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/register', requestOptions)
+            .then(resp => {
+                if (resp.ok) console.log('User registered successfully');
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                console.log('There was an error...', error)
+            });
     }
 
     const password = watch('password');
