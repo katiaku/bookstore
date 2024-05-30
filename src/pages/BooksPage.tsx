@@ -1,7 +1,18 @@
+import { useEffect, useState } from "react";
 import BookItem from "../components/BookItem";
-import books from "../mock/mock_data";
+import { Book } from "../config/types";
+// import books from "../mock/mock_data";
 
 export default function BooksPage() {
+
+    const [books, setBooks] = useState<Book[]>([]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/books?id_user=2')
+            .then(resp => resp.json())
+            .then(books => setBooks(books))
+            .catch(error => console.log(error))
+    }, []);
 
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll">
