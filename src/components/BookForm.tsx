@@ -133,7 +133,11 @@ export default function BookForm() {
                     // name="photo"
                     // onChange={handleInputChange}
                     {...register('photo', {
-                        required: { value: true, message: 'Photo is required'}
+                        required: { value: true, message: 'Photo is required'},
+                        pattern: {
+                            value: /(http[s]?:\/\/.*\.(?:png|jpg|gif|svg|jpeg))/i,
+                            message: 'Invalid photo URL'
+                        }
                     })}
                 />
                 { 
