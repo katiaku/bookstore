@@ -47,7 +47,7 @@ export default function BookForm() {
                     type="text"
                     id="title"
                     placeholder="Harry Potter"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.title ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.title}
                     // name="title"
                     // onChange={handleInputChange}
@@ -74,7 +74,7 @@ export default function BookForm() {
                     type="text"
                     id="author"
                     placeholder="J.K.Rowling"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.author ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.author}
                     // name="author"
                     // onChange={handleInputChange}
@@ -101,7 +101,7 @@ export default function BookForm() {
                     type="text"
                     id="type"
                     placeholder="Hard cover"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.type ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.type}
                     // name="type"
                     // onChange={handleInputChange}
@@ -128,7 +128,7 @@ export default function BookForm() {
                     type="text"
                     id="photo"
                     placeholder="https://photo.jpg"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.photo}
                     // name="photo"
                     // onChange={handleInputChange}
@@ -155,7 +155,7 @@ export default function BookForm() {
                     type="text"
                     id="price"
                     placeholder="10.00"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.price ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.price}
                     // name="price"
                     // onChange={handleInputChange}

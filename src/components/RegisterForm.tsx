@@ -49,7 +49,7 @@ export default function RegisterForm() {
                     type="text"
                     id="firstName"
                     placeholder="John"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.firstName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.firstName}
                     // name="firstName"
                     // onChange={handleInputChange}
@@ -76,7 +76,7 @@ export default function RegisterForm() {
                     type="text"
                     id="lastName"
                     placeholder="Doe"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.lastName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.lastName}
                     // name="lastName"
                     // onChange={handleInputChange}
@@ -103,7 +103,7 @@ export default function RegisterForm() {
                     type="email"
                     id="email"
                     placeholder="email@email.com"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.email ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.email}
                     // name="email"
                     // onChange={handleInputChange}
@@ -130,7 +130,7 @@ export default function RegisterForm() {
                     type="text"
                     id="photo"
                     placeholder="https://photo.jpg"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.photo}
                     // name="photo"
                     // onChange={handleInputChange}
@@ -158,7 +158,7 @@ export default function RegisterForm() {
                     id="password"
                     minLength={8}
                     placeholder="12345678"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.password ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.password}
                     // name="password"
                     // onChange={handleInputChange}
@@ -187,7 +187,7 @@ export default function RegisterForm() {
                     id="confirmPassword"
                     minLength={8}
                     placeholder="12345678"
-                    className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                    className={ errors.confirmPassword ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.confirmPassword}
                     // name="confirmPassword"
                     // onChange={handleInputChange}
