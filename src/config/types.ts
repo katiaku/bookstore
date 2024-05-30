@@ -4,7 +4,7 @@ type Book = {
     title: string;
     author: string;
     photo: string;
-    price: string;
+    price: number;
     type: string;
 };
 

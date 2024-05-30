@@ -6,7 +6,7 @@ type FormValues = {
     author: string,
     type: string,
     photo: string,
-    price: string
+    price: number
 }
 
 export default function BookForm() {
@@ -16,7 +16,7 @@ export default function BookForm() {
     //     author: '',
     //     type: '',
     //     photo: '',
-    //     price: ''
+    //     price: 0
     // });
 
     // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -152,9 +152,10 @@ export default function BookForm() {
                     Price:
                 </label>
                 <input
-                    type="text"
+                    type="number"
                     id="price"
                     placeholder="10.00"
+                    step={0.01}
                     className={ errors.price ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
                     // value={formValues.price}
                     // name="price"
