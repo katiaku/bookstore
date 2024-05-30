@@ -11,7 +11,6 @@ import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
 import PrivateRoutes from './components/PrivateRoutes'
 import PublicRoutes from './components/PublicRoutes'
-import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
 
@@ -28,9 +27,7 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoutes />}>
-          <Route path='/profile' element={<ProfilePage />}>
-            <Route path='edit' element={<EditProfilePage />} />
-          </Route>
+          <Route path='/profile' element={<ProfilePage />} />
           <Route path='/books' element={<BooksPage />} />
           <Route path='/add-book' element={<AddBookPage />} />
           <Route path='/edit-book' element={<EditBookPage />} />
