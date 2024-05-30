@@ -26,7 +26,7 @@ export default function RegisterForm() {
     //     console.log(formValues);
     // }
 
-    const { register, handleSubmit, formState } = useForm<FormValues>({
+    const { register, handleSubmit, formState, watch } = useForm<FormValues>({
         mode: "onSubmit"
     });
 
@@ -35,6 +35,8 @@ export default function RegisterForm() {
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
     }
+
+    const password = watch('password');
 
     return (
         <form
@@ -192,7 +194,8 @@ export default function RegisterForm() {
                     // name="confirmPassword"
                     // onChange={handleInputChange}
                     {...register('confirmPassword', {
-                        required: { value: true, message: 'Please confirm the password'}
+                        required: { value: true, message: 'Please confirm the password'},
+                        validate: value => value === password || 'Passwords do not match'
                     })}
                 />
                 { 

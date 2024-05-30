@@ -2,8 +2,8 @@ import { NavLink } from "react-router-dom";
 
 export default function Menu() {
 
-    const user = {};
-    // const user = null;
+    // const user = {};
+    const user = null;
 
     return (
         <nav className="flex flex-col md:flex-row md:w-1/2 h-full mx-auto justify-center items-center font-semibold uppercase font-poppins text-xl md:text-base gap-0">
