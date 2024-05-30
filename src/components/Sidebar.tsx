@@ -3,7 +3,7 @@ import Menu from "./Menu";
 
 export default function Sidebar({ isOpenSidebar }: SidebarProps) {
     return (
-        <div className="absolute w-1/2 top-[70px] right-0 page-height py-20 bg-orange-400">
+        <div className="absolute w-1/2 top-[60px] right-0 page-height py-20 bg-orange-400">
             <Menu isOpenSidebar={isOpenSidebar} />
         </div>
     )
