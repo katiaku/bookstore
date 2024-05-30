@@ -19,7 +19,7 @@ export default function LoginForm() {
     // }
 
     const { register, handleSubmit, formState } = useForm<FormValues>({
-        mode: "onChange"
+        mode: "onSubmit"
     });
 
     const { errors } = formState;
@@ -29,7 +29,10 @@ export default function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200">
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
+        >
             <div className="flex flex-col">
                 <label htmlFor="email" className="text-sm font-semibold">
                     Email:
@@ -55,9 +58,6 @@ export default function LoginForm() {
                     : 
                     <div className="h-4"></div> 
                 }
-                {/* <div className="h-4"></div> */}
-                {/* <div className="h-4 text-red-400 text-xs text-right pt-1">Incorrect email</div> */}
-                {/* <div className="h-4 text-red-400 text-xs text-right pt-1">Email is required</div> */}
             </div>
 
             <div className="flex flex-col">
@@ -85,9 +85,6 @@ export default function LoginForm() {
                     : 
                     <div className="h-4"></div> 
                 }
-                {/* <div className="h-4"></div> */}
-                {/* <div className="h-4 text-red-400 text-xs text-right pt-1">Incorrect password</div> */}
-                {/* <div className="h-4 text-red-400 text-xs text-right pt-1">Password is required</div> */}
             </div>
 
             <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">

@@ -1,22 +1,44 @@
-import { useState } from "react";
+// import { useState } from "react";
+import { useForm } from "react-hook-form";
+
+type FormValues = {
+    title: string,
+    author: string,
+    type: string,
+    photo: string,
+    price: string
+}
 
 export default function BookForm() {
 
-    const [formValues, setFormValues] = useState({
-        title: '',
-        author: '',
-        type: '',
-        photo: '',
-        price: 0
+    // const [formValues, setFormValues] = useState({
+    //     title: '',
+    //     author: '',
+    //     type: '',
+    //     photo: '',
+    //     price: ''
+    // });
+
+    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    //     setFormValues({ ...formValues, [event.target.name]: event.target.value });
+    //     console.log(formValues);
+    // }
+
+    const { register, handleSubmit, formState } = useForm<FormValues>({
+        mode: "onSubmit"
     });
 
-    function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-        setFormValues({ ...formValues, [event.target.name]: event.target.value });
-        console.log(formValues);
+    const { errors } = formState;
+
+    function onSubmit(data: FormValues) {
+        console.log('submitted', data);
     }
 
     return (
-        <form className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200">
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
+        >
             <div className="flex flex-col">
                 <label htmlFor="title" className="text-sm font-semibold">
                     Title:
@@ -26,11 +48,22 @@ export default function BookForm() {
                     id="title"
                     placeholder="Harry Potter"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    value={formValues.title}
-                    name="title"
-                    onChange={handleInputChange}
+                    // value={formValues.title}
+                    // name="title"
+                    // onChange={handleInputChange}
+                    {...register('title', {
+                        required: { value: true, message: 'Title is required'}
+                    })}
                 />
-                <div className="h-4"></div>
+                { 
+                    errors.title 
+                    ? 
+                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                        { errors.title.message }
+                    </div> 
+                    : 
+                    <div className="h-4"></div> 
+                }
             </div>
 
             <div className="flex flex-col">
@@ -42,11 +75,22 @@ export default function BookForm() {
                     id="author"
                     placeholder="J.K.Rowling"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    value={formValues.author}
-                    name="author"
-                    onChange={handleInputChange}
+                    // value={formValues.author}
+                    // name="author"
+                    // onChange={handleInputChange}
+                    {...register('author', {
+                        required: { value: true, message: 'Author is required'}
+                    })}
                 />
-                <div className="h-4"></div>
+                { 
+                    errors.author 
+                    ? 
+                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                        { errors.author.message }
+                    </div> 
+                    : 
+                    <div className="h-4"></div> 
+                }
             </div>
 
             <div className="flex flex-col">
@@ -58,11 +102,22 @@ export default function BookForm() {
                     id="type"
                     placeholder="Hard cover"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    value={formValues.type}
-                    name="type"
-                    onChange={handleInputChange}
+                    // value={formValues.type}
+                    // name="type"
+                    // onChange={handleInputChange}
+                    {...register('type', {
+                        required: { value: true, message: 'Book type is required'}
+                    })}
                 />
-                <div className="h-4"></div>
+                { 
+                    errors.type 
+                    ? 
+                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                        { errors.type.message }
+                    </div> 
+                    : 
+                    <div className="h-4"></div> 
+                }
             </div>
 
             <div className="flex flex-col">
@@ -74,11 +129,22 @@ export default function BookForm() {
                     id="photo"
                     placeholder="https://photo.jpg"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    value={formValues.photo}
-                    name="photo"
-                    onChange={handleInputChange}
+                    // value={formValues.photo}
+                    // name="photo"
+                    // onChange={handleInputChange}
+                    {...register('photo', {
+                        required: { value: true, message: 'Photo is required'}
+                    })}
                 />
-                <div className="h-4"></div>
+                { 
+                    errors.photo 
+                    ? 
+                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                        { errors.photo.message }
+                    </div> 
+                    : 
+                    <div className="h-4"></div> 
+                }
             </div>
 
             <div className="flex flex-col">
@@ -86,15 +152,27 @@ export default function BookForm() {
                     Price:
                 </label>
                 <input
-                    type="number"
+                    type="text"
                     id="price"
                     placeholder="10.00"
                     className="text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    value={formValues.price}
-                    name="price"
-                    onChange={handleInputChange}
+                    // value={formValues.price}
+                    // name="price"
+                    // onChange={handleInputChange}
+                    {...register('price', {
+                        required: { value: true, message: 'Price is required'},
+                        min: { value: 0.01, message: 'Please enter a positive number'}
+                    })}
                 />
-                <div className="h-4"></div>
+                { 
+                    errors.price 
+                    ? 
+                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                        { errors.price.message }
+                    </div> 
+                    : 
+                    <div className="h-4"></div> 
+                }
             </div>
             
             <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
