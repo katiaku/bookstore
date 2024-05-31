@@ -1,7 +1,7 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginSchema } from "../config/schema";
+import { loginSchema } from "../../config/schema";
+import { User } from "../../config/types";
 
 type FormValues = {
     email: string,
@@ -10,25 +10,42 @@ type FormValues = {
 
 export default function LoginForm() {
 
-    // const [formValues, setFormValues] = useState({
-    //     email: '',
-    //     password: ''
-    // });
-
-    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    //     setFormValues({ ...formValues, [event.target.name]: event.target.value });
-    //     console.log(formValues);
-    // }
-
-    const { register, handleSubmit, formState } = useForm<FormValues>({
+    const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onSubmit",
         resolver: zodResolver(loginSchema)
     });
 
     const { errors } = formState;
 
+    let user: User | null = null;
+
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
+
+        user = data;
+        handleLoginUser(user);
+        reset();
+    }
+
+    function handleLoginUser(submitData: User) {
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/login', requestOptions)
+            .then(resp => {
+                if (resp.ok) console.log('User logged in successfully');
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                console.log('There was an error...', error)
+            });
     }
 
     return (
@@ -45,12 +62,6 @@ export default function LoginForm() {
                     id="email"
                     placeholder="email@email.com"
                     className={ errors.email ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.email}
-                    // name="email"
-                    // onChange={handleInputChange}
-                    // {...register('email', {
-                    //     required: { value: true, message: 'Email is required'}
-                    // })}
                     {...register('email')}
                 />
                 { 
@@ -73,12 +84,6 @@ export default function LoginForm() {
                     id="password"
                     placeholder="12345678"
                     className={ errors.password ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.password}
-                    // name="password"
-                    // onChange={handleInputChange}
-                    // {...register('password', {
-                    //     required: { value: true, message: 'Password is required'}
-                    // })}
                     {...register('password')}
                 />
                 { 

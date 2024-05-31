@@ -9,8 +9,8 @@ import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
-import PrivateRoutes from './components/PrivateRoutes'
-import PublicRoutes from './components/PublicRoutes'
+import PublicRoutes from './components/routes/PublicRoutes'
+import PrivateRoutes from './components/routes/PrivateRoutes'
 
 function App() {
 
