@@ -11,6 +11,8 @@ import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
 import PublicRoutes from './components/routes/PublicRoutes'
 import PrivateRoutes from './components/routes/PrivateRoutes'
+import { Flip, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -35,6 +37,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <ToastContainer transition={Flip} />
     </>
   )
 }

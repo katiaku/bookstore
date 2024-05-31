@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../config/schema";
 import { User } from "../../config/types";
+import { toast } from "react-toastify";
 
 type FormValues = {
     email: string,
@@ -39,12 +40,19 @@ export default function LoginForm() {
 
         fetch('http://localhost:3000/login', requestOptions)
             .then(resp => {
-                if (resp.ok) console.log('User logged in successfully');
+                if (resp.ok) toast.success("User logged in successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
                 return resp.json();
             })
             .then(data => console.log(data))
             .catch(error => {
-                console.log('There was an error...', error)
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
             });
     }
 

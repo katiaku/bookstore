@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { User } from "../../config/types";
+import { toast } from "react-toastify";
 
 type FormValues = {
     firstName: string,
@@ -40,12 +41,19 @@ export default function RegisterForm() {
 
         fetch('http://localhost:3000/register', requestOptions)
             .then(resp => {
-                if (resp.ok) console.log('User registered successfully');
+                if (resp.ok) toast.success("User registered successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
                 return resp.json();
             })
             .then(data => console.log(data))
             .catch(error => {
-                console.log('There was an error...', error)
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
             });
     }
 
