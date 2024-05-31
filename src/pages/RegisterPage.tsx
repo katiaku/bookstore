@@ -12,7 +12,7 @@ export default function RegisterPage() {
                 <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:bg-blue-950 lg:h-full">
                     <h1 className="text-white font-poppins text-center text-2xl mb-4">
                         Welcome to <span className="text-orange-400">BookStore</span>.
-                        <br></br>
+                        <br />
                         Create your account.
                     </h1>
                     <RegisterForm />
