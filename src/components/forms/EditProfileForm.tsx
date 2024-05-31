@@ -1,5 +1,6 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { User } from "../../config/types";
+import { toast } from "react-toastify";
 
 type FormValues = {
     firstName: string,
@@ -10,26 +11,48 @@ type FormValues = {
 
 export default function EditProfileForm() {
 
-    // const [formValues, setFormValues] = useState({
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    //     photo: ''
-    // });
-
-    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    //     setFormValues({ ...formValues, [event.target.name]: event.target.value });
-    //     console.log(formValues);
-    // }
-
-    const { register, handleSubmit, formState } = useForm<FormValues>({
+    const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onSubmit"
     });
 
     const { errors } = formState;
 
+    let updatedUser: User | null = null;
+
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
+
+        updatedUser = data;
+        handleUpdateUser(updatedUser);
+        reset();
+    }
+
+    function handleUpdateUser(submitData: User) {
+
+        const requestOptions = {
+            method: 'PUT',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/users', requestOptions)
+            .then(resp => {
+                if (resp.ok) toast.success("User profile updated successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
+            });
     }
     
     return (
@@ -46,9 +69,6 @@ export default function EditProfileForm() {
                     id="firstName"
                     placeholder="John"
                     className={ errors.firstName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.firstName}
-                    // name="firstName"
-                    // onChange={handleInputChange}
                     {...register('firstName', {
                         required: { value: true, message: 'First name is required'}
                     })}
@@ -73,9 +93,6 @@ export default function EditProfileForm() {
                     id="lastName"
                     placeholder="Doe"
                     className={ errors.lastName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.lastName}
-                    // name="lastName"
-                    // onChange={handleInputChange}
                     {...register('lastName', {
                         required: { value: true, message: 'Last name is required'}
                     })}
@@ -100,9 +117,6 @@ export default function EditProfileForm() {
                     id="email"
                     placeholder="email@email.com"
                     className={ errors.email ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.email}
-                    // name="email"
-                    // onChange={handleInputChange}
                     {...register('email', {
                         required: { value: true, message: 'Email is required'}
                     })}
@@ -127,9 +141,6 @@ export default function EditProfileForm() {
                     id="photo"
                     placeholder="https://photo.jpg"
                     className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.photo}
-                    // name="photo"
-                    // onChange={handleInputChange}
                     {...register('photo', {
                         required: { value: true, message: 'Photo is required'}
                     })}

@@ -21,7 +21,7 @@ export default function Header() {
             </div>
 
             <button
-                className="md:hidden font-bold text-4xl text-blue-950 ml-auto mr-2"
+                className="md:hidden font-bold text-3xl text-blue-950 ml-auto mr-2"
                 onClick={() => setIsOpenSidebar(!isOpenSidebar)}
             >
                 {isOpenSidebar ? <AiOutlineClose /> : <RxHamburgerMenu /> }

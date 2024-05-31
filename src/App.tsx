@@ -9,9 +9,10 @@ import RegisterPage from './pages/RegisterPage'
 import ProfilePage from './pages/ProfilePage'
 import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
-import PrivateRoutes from './components/PrivateRoutes'
-import PublicRoutes from './components/PublicRoutes'
-import EditProfilePage from './pages/EditProfilePage'
+import PublicRoutes from './components/routes/PublicRoutes'
+import PrivateRoutes from './components/routes/PrivateRoutes'
+import { Flip, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -28,9 +29,7 @@ function App() {
         </Route>
 
         <Route element={<PrivateRoutes />}>
-          <Route path='/profile' element={<ProfilePage />}>
-            <Route path='edit' element={<EditProfilePage />} />
-          </Route>
+          <Route path='/profile' element={<ProfilePage />} />
           <Route path='/books' element={<BooksPage />} />
           <Route path='/add-book' element={<AddBookPage />} />
           <Route path='/edit-book' element={<EditBookPage />} />
@@ -38,6 +37,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <ToastContainer transition={Flip} />
     </>
   )
 }

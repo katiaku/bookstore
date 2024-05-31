@@ -1,5 +1,6 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { User } from "../../config/types";
+import { toast } from "react-toastify";
 
 type FormValues = {
     firstName: string,
@@ -12,29 +13,51 @@ type FormValues = {
 
 export default function RegisterForm() {
 
-    // const [formValues, setFormValues] = useState({
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    //     photo: '',
-    //     password: '',
-    //     confirmPassword: ''
-    // });
-
-    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    //     setFormValues({ ...formValues, [event.target.name]: event.target.value });
-    //     console.log(formValues);
-    // }
-
-    const { register, handleSubmit, formState } = useForm<FormValues>({
+    const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
         mode: "onSubmit"
     });
 
     const { errors } = formState;
 
+    let newUser: User | null = null;
+
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
+
+        newUser = data;
+        handleSubmitUser(newUser);
+        reset();
     }
+
+    function handleSubmitUser(submitData: User) {
+
+        const requestOptions = {
+            method: 'POST',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/register', requestOptions)
+            .then(resp => {
+                if (resp.ok) toast.success("User registered successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
+            });
+    }
+
+    const password = watch('password');
 
     return (
         <form
@@ -50,9 +73,6 @@ export default function RegisterForm() {
                     id="firstName"
                     placeholder="John"
                     className={ errors.firstName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.firstName}
-                    // name="firstName"
-                    // onChange={handleInputChange}
                     {...register('firstName', {
                         required: { value: true, message: 'First name is required'}
                     })}
@@ -77,9 +97,6 @@ export default function RegisterForm() {
                     id="lastName"
                     placeholder="Doe"
                     className={ errors.lastName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.lastName}
-                    // name="lastName"
-                    // onChange={handleInputChange}
                     {...register('lastName', {
                         required: { value: true, message: 'Last name is required'}
                     })}
@@ -104,9 +121,6 @@ export default function RegisterForm() {
                     id="email"
                     placeholder="email@email.com"
                     className={ errors.email ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.email}
-                    // name="email"
-                    // onChange={handleInputChange}
                     {...register('email', {
                         required: { value: true, message: 'Email is required'}
                     })}
@@ -131,9 +145,6 @@ export default function RegisterForm() {
                     id="photo"
                     placeholder="https://photo.jpg"
                     className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.photo}
-                    // name="photo"
-                    // onChange={handleInputChange}
                     {...register('photo', {
                         required: { value: true, message: 'Photo is required'}
                     })}
@@ -159,9 +170,6 @@ export default function RegisterForm() {
                     minLength={8}
                     placeholder="12345678"
                     className={ errors.password ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.password}
-                    // name="password"
-                    // onChange={handleInputChange}
                     {...register('password', {
                         required: { value: true, message: 'Password is required'},
                         minLength: { value: 8, message: 'The password must be at least 8 characters long'}
@@ -188,11 +196,9 @@ export default function RegisterForm() {
                     minLength={8}
                     placeholder="12345678"
                     className={ errors.confirmPassword ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.confirmPassword}
-                    // name="confirmPassword"
-                    // onChange={handleInputChange}
                     {...register('confirmPassword', {
-                        required: { value: true, message: 'Please confirm the password'}
+                        required: { value: true, message: 'Please confirm the password'},
+                        validate: value => value === password || 'Passwords do not match'
                     })}
                 />
                 { 

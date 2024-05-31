@@ -4,7 +4,7 @@ type Book = {
     title: string;
     author: string;
     photo: string;
-    price: string;
+    price: number;
     type: string;
 };
 
@@ -16,8 +16,17 @@ type SidebarProps = {
     isOpenSidebar?: boolean;
 };
 
+type User = {
+    firstName: string;
+    lastName: string;
+    email: string;
+    photo: string;
+    password: string;
+};
+
 export type {
     Book,
     BookItemProps,
-    SidebarProps
+    SidebarProps,
+    User
 };
