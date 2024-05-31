@@ -1,5 +1,6 @@
-// import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Book } from "../../config/types";
+import { toast } from "react-toastify";
 
 type FormValues = {
     title: string,
@@ -11,27 +12,48 @@ type FormValues = {
 
 export default function EditBookForm() {
 
-    // const [formValues, setFormValues] = useState({
-    //     title: '',
-    //     author: '',
-    //     type: '',
-    //     photo: '',
-    //     price: 0
-    // });
-
-    // function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
-    //     setFormValues({ ...formValues, [event.target.name]: event.target.value });
-    //     console.log(formValues);
-    // }
-
-    const { register, handleSubmit, formState } = useForm<FormValues>({
+    const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onSubmit"
     });
 
     const { errors } = formState;
 
+    let updatedBook: Book | null = null;
+
     function onSubmit(data: FormValues) {
         console.log('submitted', data);
+
+        updatedBook = data;
+        handleUpdateBook(updatedBook);
+        reset();
+    }
+
+    function handleUpdateBook(submitData: Book) {
+
+        const requestOptions = {
+            method: 'PUT',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/books', requestOptions)
+            .then(resp => {
+                if (resp.ok) toast.success("Book updated successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
+            });
     }
 
     return (
@@ -48,9 +70,6 @@ export default function EditBookForm() {
                     id="title"
                     placeholder="Harry Potter"
                     className={ errors.title ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.title}
-                    // name="title"
-                    // onChange={handleInputChange}
                     {...register('title', {
                         required: { value: true, message: 'Title is required'}
                     })}
@@ -75,9 +94,6 @@ export default function EditBookForm() {
                     id="author"
                     placeholder="J.K.Rowling"
                     className={ errors.author ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.author}
-                    // name="author"
-                    // onChange={handleInputChange}
                     {...register('author', {
                         required: { value: true, message: 'Author is required'}
                     })}
@@ -102,9 +118,6 @@ export default function EditBookForm() {
                     id="type"
                     placeholder="Hard cover"
                     className={ errors.type ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.type}
-                    // name="type"
-                    // onChange={handleInputChange}
                     {...register('type', {
                         required: { value: true, message: 'Book type is required'}
                     })}
@@ -129,9 +142,6 @@ export default function EditBookForm() {
                     id="photo"
                     placeholder="https://photo.jpg"
                     className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.photo}
-                    // name="photo"
-                    // onChange={handleInputChange}
                     {...register('photo', {
                         required: { value: true, message: 'Photo is required'},
                         pattern: {
@@ -161,9 +171,6 @@ export default function EditBookForm() {
                     placeholder="10.00"
                     step={0.01}
                     className={ errors.price ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    // value={formValues.price}
-                    // name="price"
-                    // onChange={handleInputChange}
                     {...register('price', {
                         required: { value: true, message: 'Price is required'},
                         min: { value: 0.01, message: 'Please enter a positive number'}
