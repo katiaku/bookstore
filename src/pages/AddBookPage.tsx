@@ -1,4 +1,4 @@
-import BookForm from "../components/forms/BookForm";
+import AddBookForm from "../components/forms/AddBookForm";
 
 export default function AddBookPage() {
     return (
@@ -7,7 +7,7 @@ export default function AddBookPage() {
                 <img className="h-full w-full object-cover" src="../../public/img/bg-6.avif" alt="" />
             </div>
             <div className="absolute top-0 z-10 w-full h-full flex justify-center items-center">
-                <BookForm />
+                <AddBookForm />
             </div>
         </div>
     )

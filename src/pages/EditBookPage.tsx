@@ -1,4 +1,4 @@
-import BookForm from "../components/forms/BookForm";
+import EditBookForm from "../components/forms/EditBookForm";
 
 export default function EditBookPage() {
     return (
@@ -7,7 +7,7 @@ export default function EditBookPage() {
                 <img className="h-full w-full object-cover" src="../../public/img/bg-6.avif" alt="" />
             </div>
             <div className="absolute top-0 z-10 w-full h-full flex justify-center items-center">
-                <BookForm />
+                <EditBookForm />
             </div>
         </div>
     )

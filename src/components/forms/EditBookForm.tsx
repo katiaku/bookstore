@@ -9,7 +9,7 @@ type FormValues = {
     price: number
 }
 
-export default function BookForm() {
+export default function EditBookForm() {
 
     // const [formValues, setFormValues] = useState({
     //     title: '',
