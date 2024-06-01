@@ -1,5 +1,6 @@
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
-import { BookItemProps } from "../config/types";
+import { Book, BookItemProps } from "../config/types";
+import { toast } from "react-toastify";
 
 export default function BookItem(props: BookItemProps) {
 
@@ -9,8 +10,36 @@ export default function BookItem(props: BookItemProps) {
     //     console.log(e);
     // }
 
-    function handleDeleteBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        console.log(e);
+    // function handleDeleteBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    //     console.log(e);
+    // }
+
+    function handleDeleteBook(submitData: Book) {
+
+        const requestOptions = {
+            method: 'DELETE',
+            body: JSON.stringify(submitData),
+            headers: {
+                'Content-type': 'application/json'
+            }
+        };
+
+        fetch('http://localhost:3000/books', requestOptions)
+            .then(resp => {
+                if (resp.ok) toast.success("Book deleted successfully", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                return resp.json();
+            })
+            .then(data => console.log(data))
+            .catch(error => {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error);
+            });
     }
 
     return (
