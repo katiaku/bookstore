@@ -18,8 +18,8 @@ export default function BooksPage() {
     }, [id_user]);
 
     return (
-        <div className="bg-blue-950 page-height overflow-y-scroll">
-            <div className="flex flex-wrap justify-start gap-14 gap-y-20 py-20 px-4 md:px-20">
+        <div className="bg-blue-950 page-height overflow-y-scroll w-full">
+            <div className="flex flex-wrap justify-center gap-14 gap-y-20 py-20 px-4 md:px-20 w-full">
                 {books.map((book) => (
                     <BookItem book={book} key={book.id_book} />
                 ))}

@@ -43,8 +43,8 @@ export default function BookItem(props: BookItemProps) {
     }
 
     return (
-        <div className='cursor-default font-poppins w-full md:w-[400px] h-[280px] relative shadow-md bg-slate-100'>
-            <div className='absolute shadow-md left-[15px] -top-[20px] max-h-[280px] overflow-hidden'>
+        <div className='font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200'>
+            <div className='absolute shadow-md left-[15px] -top-[15px] max-h-[280px] overflow-hidden'>
                 <img
                     src={ book.photo }
                     alt={`Foto del libro ${ book.title } de ${ book.author }` }
@@ -52,14 +52,14 @@ export default function BookItem(props: BookItemProps) {
                 />
             </div>
 
-            <div className='bg-slate-100/70 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] md:pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
+            <div className='cursor-default bg-slate-200/70 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] md:pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
                 <div>
                     <p className='font-bold text-2xl md:text-3xl text-slate-700'>{ book.title }</p>
-                    <p className='mt-1 mb-10 text-slate-700'>{ book.author }</p>
-                    <p className='text-xs md:text-sm italic text-slate-500'>{ book.type }</p>
+                    <p className='my-1 text-slate-700'>{ book.author }</p>
+                    <p className='text-xs italic text-slate-500'>{ book.type }</p>
                 </div>
 
-                <div className='absolute -left-[20%] md:-left-[37px] -bottom-[15px] w-[60px] h-[60px] rounded-full bg-orange-400 text-white flex justify-center items-center shadow-md'>
+                <div className='absolute -left-[20%] md:-left-[30px] -bottom-[15px] w-[60px] h-[60px] rounded-full bg-orange-400 text-white flex justify-center items-center shadow-md'>
                     <span>{ book.price }€</span>
                 </div>
 
