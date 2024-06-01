@@ -17,6 +17,7 @@ type SidebarProps = {
 };
 
 type User = {
+    id_user: number,
     firstName: string;
     lastName: string;
     email: string;
