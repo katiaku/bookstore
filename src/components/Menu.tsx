@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
+// import { UserContext } from "../providers/UserProvider";
+// import { useContext } from "react";
 
 export default function Menu() {
 
     const user = {};
     // const user = null;
+
+    // const { user } = useContext(UserContext);
 
     return (
         <nav className="flex flex-col md:flex-row md:w-1/2 h-full mx-auto justify-center items-center font-semibold uppercase font-poppins text-xl md:text-base gap-0">
