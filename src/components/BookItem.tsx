@@ -5,9 +5,9 @@ export default function BookItem(props: BookItemProps) {
 
     const { book } = props;
 
-    function handleEditBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
-        console.log(e);
-    }
+    // function handleEditBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+    //     console.log(e);
+    // }
 
     function handleDeleteBook(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
         console.log(e);
@@ -35,8 +35,10 @@ export default function BookItem(props: BookItemProps) {
                 </div>
 
                 <div className='self-end flex gap-2'>
-                    <button onClick={handleEditBook}>
-                        <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                    <button>
+                        <a href="/edit-book">
+                            <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                        </a>
                     </button>
                     <button onClick={handleDeleteBook}>
                         <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
