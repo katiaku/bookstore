@@ -1,6 +1,7 @@
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { Book, BookItemProps } from "../config/types";
 import { toast } from "react-toastify";
+import { NavLink } from "react-router-dom";
 
 export default function BookItem(props: BookItemProps) {
 
@@ -65,9 +66,9 @@ export default function BookItem(props: BookItemProps) {
 
                 <div className='self-end flex gap-2'>
                     <button>
-                        <a href="/edit-book">
+                        <NavLink to="/edit-book">
                             <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
-                        </a>
+                        </NavLink>
                     </button>
                     <button onClick={handleDeleteBook}>
                         <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
