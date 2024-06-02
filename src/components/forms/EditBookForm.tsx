@@ -188,7 +188,7 @@ export default function EditBookForm() {
             </div>
             
             <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
-                Submit Data
+                <a className="w-full h-full" href="/books">Submit Data</a>
             </button>
         </form>
     )
