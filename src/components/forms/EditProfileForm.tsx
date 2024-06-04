@@ -1,3 +1,4 @@
+import { BiCheckCircle } from "react-icons/bi"; 
 import { useForm } from "react-hook-form";
 import { User } from "../../config/types";
 import { toast } from "react-toastify";
@@ -15,7 +16,7 @@ export default function EditProfileForm() {
         mode: "onSubmit"
     });
 
-    const { errors } = formState;
+    const { errors, dirtyFields } = formState;
 
     let updatedUser: User | null = null;
 
@@ -64,15 +65,26 @@ export default function EditProfileForm() {
                 <label htmlFor="firstName" className="text-sm font-semibold">
                     First Name:
                 </label>
-                <input
-                    type="text"
-                    id="firstName"
-                    placeholder="John"
-                    className={ errors.firstName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('firstName', {
-                        required: { value: true, message: 'First name is required'}
-                    })}
-                />
+
+                <div className={
+                        errors.firstName 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="firstName"
+                        placeholder="John"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('firstName', {
+                            required: { value: true, message: 'First name is required'}
+                        })}
+                    />
+                    { dirtyFields.firstName && !errors.firstName && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.firstName 
                     ? 
@@ -88,15 +100,26 @@ export default function EditProfileForm() {
                 <label htmlFor="lastName" className="text-sm font-semibold">
                     Last Name:
                 </label>
-                <input
-                    type="text"
-                    id="lastName"
-                    placeholder="Doe"
-                    className={ errors.lastName ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('lastName', {
-                        required: { value: true, message: 'Last name is required'}
-                    })}
-                />
+
+                <div className={
+                        errors.lastName 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="lastName"
+                        placeholder="Doe"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('lastName', {
+                            required: { value: true, message: 'Last name is required'}
+                        })}
+                    />
+                    { dirtyFields.lastName && !errors.lastName && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.lastName 
                     ? 
@@ -112,15 +135,26 @@ export default function EditProfileForm() {
                 <label htmlFor="email" className="text-sm font-semibold">
                     Email:
                 </label>
-                <input
-                    type="email"
-                    id="email"
-                    placeholder="email@email.com"
-                    className={ errors.email ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('email', {
-                        required: { value: true, message: 'Email is required'}
-                    })}
-                />
+
+                <div className={
+                        errors.email 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="email@email.com"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('email', {
+                            required: { value: true, message: 'Email is required'}
+                        })}
+                    />
+                    { dirtyFields.email && !errors.email && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.email 
                     ? 
@@ -134,17 +168,28 @@ export default function EditProfileForm() {
 
             <div className="flex flex-col">
                 <label htmlFor="photo" className="text-sm font-semibold">
-                    Photo:
+                    Photo URL:
                 </label>
-                <input
-                    type="text"
-                    id="photo"
-                    placeholder="https://photo.jpg"
-                    className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('photo', {
-                        required: { value: true, message: 'Photo is required'}
-                    })}
-                />
+
+                <div className={
+                        errors.photo 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="photo"
+                        placeholder="https://photo.jpg"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('photo', {
+                            required: { value: true, message: 'Photo URL is required'}
+                        })}
+                    />
+                    { dirtyFields.photo && !errors.photo && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.photo 
                     ? 
