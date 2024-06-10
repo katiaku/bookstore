@@ -1,3 +1,4 @@
+import { BiCheckCircle } from "react-icons/bi";  
 import { useForm } from "react-hook-form";
 import { Book } from "../../config/types";
 import { toast } from "react-toastify";
@@ -13,10 +14,10 @@ type FormValues = {
 export default function AddBookForm() {
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange"
     });
 
-    const { errors } = formState;
+    const { errors, dirtyFields } = formState;
 
     let newBook: Book | null = null;
 
@@ -65,15 +66,26 @@ export default function AddBookForm() {
                 <label htmlFor="title" className="text-sm font-semibold">
                     Title:
                 </label>
-                <input
-                    type="text"
-                    id="title"
-                    placeholder="Harry Potter"
-                    className={ errors.title ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('title', {
-                        required: { value: true, message: 'Title is required'}
-                    })}
-                />
+
+                <div className={
+                        errors.title 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="title"
+                        placeholder="Harry Potter"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('title', {
+                            required: { value: true, message: 'Title is required'}
+                        })}
+                    />
+                    { dirtyFields.title && !errors.title && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.title 
                     ? 
@@ -85,19 +97,30 @@ export default function AddBookForm() {
                 }
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
                 <label htmlFor="author" className="text-sm font-semibold">
                     Author:
                 </label>
-                <input
-                    type="text"
-                    id="author"
-                    placeholder="J.K.Rowling"
-                    className={ errors.author ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('author', {
-                        required: { value: true, message: 'Author is required'}
-                    })}
-                />
+                
+                <div className={
+                        errors.author 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="author"
+                        placeholder="J.K.Rowling"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('author', {
+                            required: { value: true, message: 'Author is required'}
+                        })}
+                    />
+                    { dirtyFields.author && !errors.author && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.author 
                     ? 
@@ -109,19 +132,30 @@ export default function AddBookForm() {
                 }
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
                 <label htmlFor="type" className="text-sm font-semibold">
                     Book Type:
                 </label>
-                <input
-                    type="text"
-                    id="type"
-                    placeholder="Hard cover"
-                    className={ errors.type ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('type', {
-                        required: { value: true, message: 'Book type is required'}
-                    })}
-                />
+                
+                <div className={
+                        errors.type 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="type"
+                        placeholder="Hard Cover"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('type', {
+                            required: { value: true, message: 'Book type is required'}
+                        })}
+                    />
+                    { dirtyFields.type && !errors.type && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.type 
                     ? 
@@ -133,23 +167,30 @@ export default function AddBookForm() {
                 }
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
                 <label htmlFor="photo" className="text-sm font-semibold">
-                    Photo:
+                    Photo URL:
                 </label>
-                <input
-                    type="text"
-                    id="photo"
-                    placeholder="https://photo.jpg"
-                    className={ errors.photo ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('photo', {
-                        required: { value: true, message: 'Photo is required'},
-                        pattern: {
-                            value: /(http[s]?:\/\/.*\.(?:png|jpg|gif|svg|jpeg))/i,
-                            message: 'Invalid photo URL'
-                        }
-                    })}
-                />
+                
+                <div className={
+                        errors.photo 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="text"
+                        id="photo"
+                        placeholder="https://photo.jpg"
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('photo', {
+                            required: { value: true, message: 'Photo URL is required'}
+                        })}
+                    />
+                    { dirtyFields.photo && !errors.photo && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.photo 
                     ? 
@@ -161,21 +202,31 @@ export default function AddBookForm() {
                 }
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col relative">
                 <label htmlFor="price" className="text-sm font-semibold">
                     Price:
                 </label>
-                <input
-                    type="number"
-                    id="price"
-                    placeholder="10.00"
-                    step={0.01}
-                    className={ errors.price ? "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400" : "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200" }
-                    {...register('price', {
-                        required: { value: true, message: 'Price is required'},
-                        min: { value: 0.01, message: 'Please enter a positive number'}
-                    })}
-                />
+
+                <div className={
+                        errors.price 
+                        ?
+                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        :
+                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                    }
+                >
+                    <input
+                        type="number"
+                        id="price"
+                        placeholder="10.00"
+                        step={0.01}
+                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        {...register('price', {
+                            required: { value: true, message: 'Price is required'}
+                        })}
+                    />
+                    { dirtyFields.price && !errors.price && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                </div>
                 { 
                     errors.price 
                     ? 

@@ -13,6 +13,7 @@ import PublicRoutes from './components/routes/PublicRoutes'
 import PrivateRoutes from './components/routes/PrivateRoutes'
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Error404 from './pages/Error404'
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
           <Route path='/add-book' element={<AddBookPage />} />
           <Route path='/edit-book' element={<EditBookPage />} />
         </Route>
+
+        <Route path="*" element={<Error404 />} />
       </Routes>
 
       <Footer />

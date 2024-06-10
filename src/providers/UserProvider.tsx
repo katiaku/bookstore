@@ -3,7 +3,7 @@ import { User } from "../config/types";
 
 type UserContextType = {
     user: User | null,
-    login: (user: User) => void
+    login: (user: User) => void,
     logout: () => void
 }
 
