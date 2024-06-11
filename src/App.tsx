@@ -14,6 +14,7 @@ import PrivateRoutes from './components/routes/PrivateRoutes'
 import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Error404 from './pages/Error404'
+import UserProvider from './providers/UserProvider'
 
 function App() {
 
@@ -21,25 +22,30 @@ function App() {
     <>
       <Header />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
+      <UserProvider>
 
-        <Route element={<PublicRoutes />}>
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/register' element={<RegisterPage />} />
-        </Route>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
 
-        <Route element={<PrivateRoutes />}>
-          <Route path='/profile' element={<ProfilePage />} />
-          <Route path='/books' element={<BooksPage />} />
-          <Route path='/add-book' element={<AddBookPage />} />
-          <Route path='/edit-book' element={<EditBookPage />} />
-        </Route>
+          <Route element={<PublicRoutes />}>
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='/register' element={<RegisterPage />} />
+          </Route>
 
-        <Route path="*" element={<Error404 />} />
-      </Routes>
+          <Route element={<PrivateRoutes />}>
+            <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/books' element={<BooksPage />} />
+            <Route path='/add-book' element={<AddBookPage />} />
+            <Route path='/edit-book' element={<EditBookPage />} />
+          </Route>
+
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+
+      </UserProvider>
 
       <Footer />
+
       <ToastContainer transition={Flip} />
     </>
   )
