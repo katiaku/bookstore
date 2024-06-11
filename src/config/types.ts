@@ -9,7 +9,8 @@ type Book = {
 };
 
 type BookItemProps = {
-    book: Book
+    book: Book;
+    getBooks: () => void;
 };
 
 type SidebarProps = {
