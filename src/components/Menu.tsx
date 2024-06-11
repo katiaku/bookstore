@@ -46,7 +46,7 @@ export default function Menu() {
                 Add Book
             </NavLink>}
 
-            // TODO: style the logout button
+            {/* TODO: style the logout button */}
             {user && <button onClick={logout} className="text-blue-600 hover:text-white" >Logout</button>}
 
         </nav>

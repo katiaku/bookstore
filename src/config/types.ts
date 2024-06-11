@@ -19,7 +19,7 @@ type BookListProps = {
 };
 
 type SidebarProps = {
-    isOpenSidebar?: boolean;
+    isOpenSidebar: boolean;
 };
 
 type User = {
