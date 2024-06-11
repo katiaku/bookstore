@@ -13,6 +13,11 @@ type BookItemProps = {
     getBooks: () => void;
 };
 
+type BookListProps = {
+    books: Book[];
+    getBooks: () => void;
+};
+
 type SidebarProps = {
     isOpenSidebar?: boolean;
 };
@@ -29,6 +34,7 @@ type User = {
 export type {
     Book,
     BookItemProps,
+    BookListProps,
     SidebarProps,
     User
 };
