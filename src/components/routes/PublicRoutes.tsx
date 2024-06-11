@@ -1,14 +1,10 @@
-// import { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
-// import { UserContext } from "../../providers/UserProvider";
+import useUserContext from "../../hooks/useUserContext";
 
 export default function PublicRoutes() {
 
-    const user = {};
-    // const user = null;
-
-    // const { user } = useContext(UserContext);
+    const { user } = useUserContext();
 
     if(!user) return <Outlet />
-    return <Navigate to="/" />
+    return <Navigate to="/profile" />
 }
