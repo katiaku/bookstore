@@ -9,15 +9,21 @@ type Book = {
 };
 
 type BookItemProps = {
-    book: Book
+    book: Book;
+    getBooks: () => void;
+};
+
+type BookListProps = {
+    books: Book[];
+    getBooks: () => void;
 };
 
 type SidebarProps = {
-    isOpenSidebar?: boolean;
+    isOpenSidebar: boolean;
 };
 
 type User = {
-    id_user: number,
+    id_user?: number,
     firstName: string;
     lastName: string;
     email: string;
@@ -28,6 +34,7 @@ type User = {
 export type {
     Book,
     BookItemProps,
+    BookListProps,
     SidebarProps,
     User
 };

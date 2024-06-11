@@ -1,13 +1,9 @@
 import { NavLink } from "react-router-dom";
-import { UserContext } from "../providers/UserProvider";
-import { useContext } from "react";
+import useUserContext from "../hooks/useUserContext";
 
 export default function Menu() {
 
-    // const user = {};
-    // const user = null;
-
-    const { user } = useContext(UserContext);
+    const { user, logout } = useUserContext();
 
     return (
         <nav className="flex flex-col md:flex-row md:w-1/2 h-full mx-auto justify-center items-center font-semibold uppercase font-poppins text-xl md:text-base gap-0">
@@ -49,12 +45,10 @@ export default function Menu() {
             >
                 Add Book
             </NavLink>}
-            {user && <NavLink
-                to="/edit-book"
-                className="border-4 border-x-0 border-transparent md:[&.active]:border-b-orange-400 w-full h-full md:px-4 lg:px-8 flex text-nowrap items-center justify-center text-blue-950 transition-all ease-in-out duration-300 hover:bg-blue-950 md:hover:bg-orange-400 hover:text-white"
-            >
-                Edit Book
-            </NavLink>}
+
+            {/* TODO: style the logout button */}
+            {user && <button onClick={logout} className="text-blue-600 hover:text-white" >Logout</button>}
+
         </nav>
     )
 }

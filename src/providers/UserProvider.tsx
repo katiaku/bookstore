@@ -11,11 +11,9 @@ type UserProviderProps = {
     children: ReactNode
 };
 
-const UserContext = createContext<UserContextType>({} as UserContextType);
+const UserContext = createContext<UserContextType | null>(null);
 
 function UserProvider(props: UserProviderProps) {
-
-    const { children } = props;
 
     const [user, setUser] = useState<User | null>(() => {
         const userLocalStorage = localStorage.getItem('user');
@@ -28,13 +26,13 @@ function UserProvider(props: UserProviderProps) {
     }
 
     function logout() {
-        setUser(user);
+        setUser(null);
         localStorage.removeItem('user');
     }
     
     return (
         <UserContext.Provider value={{ user, login, logout }}>
-            { children }
+            { props.children }
         </UserContext.Provider>
     )
 }
