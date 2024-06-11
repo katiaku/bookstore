@@ -14,7 +14,7 @@ export default function Header() {
         <div className="relative z-20 flex items-center px-4 lg:px-10 h-[60px] bg-white">
             <Logo />
 
-            <p className="font-nunito text-2xl md:text-md lg:text-2xl font-bold pl-2 text-blue-950 mr-4"><span className="text-orange-400">B</span>ook<span className="text-orange-400">S</span>helve</p>
+            <p className="font-nunito text-2xl md:text-md lg:text-2xl font-bold pl-2 text-blue-950 mr-4"><span className="text-orange-400">B</span>ook<span className="text-orange-400">S</span>tore</p>
 
             <div className="hidden md:block h-full w-full">
                 <Menu />
