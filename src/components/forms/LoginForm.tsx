@@ -105,7 +105,7 @@ export default function LoginForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
+            <button className="bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-bold">
                 Log In
             </button>
         </form>
