@@ -1,7 +1,8 @@
 import { BiCheckCircle } from "react-icons/bi"; 
 import { useForm } from "react-hook-form";
-import { User } from "../../config/types";
 import { toast } from "react-toastify";
+import useUserContext from "../../hooks/useUserContext";
+import { User } from "../../config/types";
 
 type FormValues = {
     firstName: string,
@@ -10,50 +11,51 @@ type FormValues = {
     photo: string,
 }
 
+// TODO: ajustar estilos de la página
+
 export default function EditProfileForm() {
 
+    const { user, login } = useUserContext();
+
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange"
     });
 
     const { errors, dirtyFields } = formState;
 
-    let updatedUser: User | null = null;
+    async function onSubmit(data: FormValues) {
+        const updatedUser: User = { ...data };
 
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        updatedUser = data;
-        handleUpdateUser(updatedUser);
-        reset();
-    }
-
-    function handleUpdateUser(submitData: User) {
-
-        const requestOptions = {
-            method: 'PUT',
-            body: JSON.stringify(submitData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/users', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("User profile updated successfully", {
+        if (user) updatedUser.id_user = user.id_user;
+        
+        try {
+            const resp = await fetch('http://localhost:3000/users', {
+                method: 'PUT',
+                body: JSON.stringify(updatedUser),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        
+            const json = await resp.json();
+        
+            if (json.code === 200) {
+                toast.success("User profile updated successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                login(updatedUser);
+            }
+            } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
     
     return (
@@ -62,7 +64,10 @@ export default function EditProfileForm() {
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label htmlFor="firstName" className="text-sm font-semibold">
+                <label
+                    htmlFor="firstName"
+                    className="text-sm font-semibold"
+                >
                     First Name:
                 </label>
 
@@ -97,7 +102,10 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="lastName" className="text-sm font-semibold">
+                <label
+                    htmlFor="lastName"
+                    className="text-sm font-semibold"
+                >
                     Last Name:
                 </label>
 
@@ -132,7 +140,10 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="email" className="text-sm font-semibold">
+                <label
+                    htmlFor="email"
+                    className="text-sm font-semibold"
+                >
                     Email:
                 </label>
 
@@ -167,7 +178,10 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="photo" className="text-sm font-semibold">
+                <label
+                    htmlFor="photo"
+                    className="text-sm font-semibold"
+                >
                     Photo URL:
                 </label>
 
