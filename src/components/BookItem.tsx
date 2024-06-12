@@ -14,7 +14,7 @@ export default function BookItem(props: BookItemProps) {
             const resp = await fetch(`http://localhost:3000/books?id_book=${book.id_book}`, { method: 'DELETE' });
             const json = await resp.json();
             
-            if (json.code === 200) {
+            if (json) {
                 toast.success("Book deleted successfully", {
                     position: "bottom-right",
                     theme: "colored"

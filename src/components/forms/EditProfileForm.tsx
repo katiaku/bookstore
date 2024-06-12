@@ -39,7 +39,7 @@ export default function EditProfileForm() {
         
             const json = await resp.json();
         
-            if (json.code === 200) {
+            if (json) {
                 toast.success("User profile updated successfully", {
                     position: "bottom-right",
                     theme: "colored"

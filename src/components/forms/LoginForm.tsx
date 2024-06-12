@@ -35,7 +35,7 @@ export default function LoginForm() {
             
             const json = await resp.json();
         
-            if (json.code === 200) toast.success("User logged in successfully", {
+            if (json) toast.success("User logged in successfully", {
                 position: "bottom-right",
                 theme: "colored"
             });

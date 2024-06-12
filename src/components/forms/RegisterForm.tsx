@@ -33,8 +33,8 @@ export default function RegisterForm() {
             });
             
             const json = await resp.json();
-            console.log(json)
-            if (json.code === 200) {
+
+            if (json) {
                 toast.success("User registered successfully", {
                     position: "bottom-right",
                     theme: "colored"
