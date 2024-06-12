@@ -39,7 +39,7 @@ export default function RegisterForm() {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                login(json.result)
+                login(json)
             }
 
         } catch (error) {

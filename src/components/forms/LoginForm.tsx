@@ -39,8 +39,8 @@ export default function LoginForm() {
                 position: "bottom-right",
                 theme: "colored"
             });
-        
-            login(json.result);
+
+            login(json);
         
         } catch (error) {
             if (error instanceof Error) {

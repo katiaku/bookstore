@@ -11,12 +11,12 @@ export default function BooksPage() {
 
     async function getBooks () {
         try {
-        const resp = await fetch(`http://localhost:3000/books?id_user=${user.id_user}`);
-    
-        const json = await resp.json(); 
-        console.log(json)
-    
-        setBooks(json.data);
+            const resp = await fetch(`http://localhost:3000/books?id_user=${user?.id_user}`);
+        
+            const json = await resp.json(); 
+            console.log(json)
+        
+            setBooks(json);
         
         } catch (error) {
             if (error instanceof Error) {
