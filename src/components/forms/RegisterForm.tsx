@@ -1,7 +1,7 @@
 import { BiCheckCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import { User } from "../../config/types";
 import { toast } from "react-toastify";
+import useUserContext from "../../hooks/useUserContext";
 
 type FormValues = {
     firstName: string,
@@ -14,48 +14,44 @@ type FormValues = {
 
 export default function RegisterForm() {
 
+    const { login } = useUserContext();
+
     const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange"
     });
 
     const { errors, dirtyFields } = formState;
 
-    let newUser: User | null = null;
-
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        newUser = data;
-        handleSubmitUser(newUser);
-        reset();
-    }
-
-    function handleSubmitUser(submitData: User) {
-
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(submitData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/register', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("User registered successfully", {
+    async function onSubmit(data: FormValues) {
+        try {
+            const resp = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            
+            const json = await resp.json();
+            console.log(json)
+            if (json.code === 200) {
+                toast.success("User registered successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                login(json.result)
+            }
+
+        } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
 
     const password = watch('password');
