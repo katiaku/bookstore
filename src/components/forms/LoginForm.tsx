@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../config/schema";
-import { User } from "../../config/types";
 import { toast } from "react-toastify";
+import useUserContext from "../../hooks/useUserContext";
 
 type FormValues = {
     email: string,
@@ -11,6 +11,8 @@ type FormValues = {
 
 export default function LoginForm() {
 
+    const { login } = useUserContext();
+
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onSubmit",
         resolver: zodResolver(loginSchema)
@@ -18,42 +20,35 @@ export default function LoginForm() {
 
     const { errors } = formState;
 
-    let user: User | null = null;
-
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        user = data;
-        handleLoginUser(user);
-        reset();
-    }
-
-    function handleLoginUser(submitData: User) {
-
-        const requestOptions = {
+    async function onSubmit(data: FormValues) {
+        try {
+        const resp = await fetch('http://localhost:3000/login', {
             method: 'POST',
-            body: JSON.stringify(submitData),
+            body: JSON.stringify(data),
             headers: {
                 'Content-type': 'application/json'
             }
-        };
-
-        fetch('http://localhost:3000/login', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("User logged in successfully", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+        });
+        
+        const json = await resp.json();
+    
+        if (json.code === 200) toast.success("User logged in successfully", {
+            position: "bottom-right",
+            theme: "colored"
+        });
+    
+        login(json.result);
+        
+        } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
 
     return (
