@@ -7,6 +7,7 @@ import Sidebar from "./Sidebar";
 import { AnimatePresence, motion } from "framer-motion";
 import useUserContext from "../hooks/useUserContext";
 import { IoMdLogOut } from "react-icons/io";
+import Avatar from "./Avatar";
 
 export default function Header() {
 
@@ -31,6 +32,8 @@ export default function Header() {
             >
                 {isOpenSidebar ? <AiOutlineClose /> : <RxHamburgerMenu /> }
             </button>
+
+            {user && <Avatar user={user} />}
 
             {user && <button onClick={logout} className="font-semibold text-2xl md:text-xl text-blue-950 pl-2 flex items-center justify-center transition-all ease-in-out duration-300 hover:text-orange-400"><IoMdLogOut /></button>}
 

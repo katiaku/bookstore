@@ -3,7 +3,7 @@ export default function Logo() {
         <img
             src="../../public/img/bookstore-logo.png"
             alt="BookStore app logo"
-            width="40"
+            width="28"
         />
     )
 }
