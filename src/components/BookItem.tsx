@@ -65,10 +65,10 @@ export default function BookItem(props: BookItemProps) {
                 </div>
 
                 <div className='self-end flex gap-2'>
-                    <button onClick={ deleteBook }>
+                    <button onClick={ editBook }>
                         <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
                     </button>
-                    <button onClick={ editBook }>
+                    <button onClick={ deleteBook }>
                         <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
                     </button>
                 </div>

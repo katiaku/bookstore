@@ -3,7 +3,7 @@ import useUserContext from "../hooks/useUserContext";
 
 export default function Menu() {
 
-    const { user, logout } = useUserContext();
+    const { user } = useUserContext();
 
     return (
         <nav className="flex flex-col md:flex-row md:w-1/2 h-full mx-auto justify-center items-center font-semibold uppercase font-poppins text-xl md:text-base gap-0">
@@ -45,9 +45,6 @@ export default function Menu() {
             >
                 Add Book
             </NavLink>}
-
-            {/* TODO: style the logout button */}
-            {user && <button onClick={logout} className="text-blue-600 hover:text-white" >Logout</button>}
 
         </nav>
     )
