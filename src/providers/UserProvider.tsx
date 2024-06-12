@@ -23,6 +23,10 @@ function UserProvider(props: UserProviderProps) {
     function login(user: User) {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
+
+        // TODO: error user undefined
+        console.log('from localstorage', user)
+        console.log('from localstorage', JSON.stringify(user))
     }
 
     function logout() {

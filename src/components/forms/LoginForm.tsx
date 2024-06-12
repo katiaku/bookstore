@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "../../config/schema";
 import { toast } from "react-toastify";
 import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     email: string,
@@ -10,6 +11,8 @@ type FormValues = {
 }
 
 export default function LoginForm() {
+
+    const navigate = useNavigate();
 
     const { login } = useUserContext();
 
@@ -49,6 +52,7 @@ export default function LoginForm() {
             }
         }
         reset();
+        navigate("/profile");
     }
 
     return (

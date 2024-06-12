@@ -1,28 +1,41 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Book } from "../config/types";
-import { UserContext } from "../providers/UserProvider";
 import BookList from "../components/BookList";
+import useUserContext from "../hooks/useUserContext";
+import { toast } from "react-toastify";
 
 export default function BooksPage() {
 
     const [books, setBooks] = useState<Book[]>([]);
-    const { user } = useContext(UserContext);
+    const { user } = useUserContext();
+
+    async function getBooks () {
+        try {
+        const resp = await fetch(`http://localhost:3000/books?id_user=${user.id_user}`);
+    
+        const json = await resp.json(); 
+        console.log(json)
+    
+        setBooks(json.data);
+        
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error.message);
+            }
+        }
+    }
 
     useEffect(() => {
-        fetch(`http://localhost:3000/books?id_user=${user.id_user}`)
-            .then(resp => resp.json())
-            .then(books => setBooks(books))
-            .catch(error => console.log(error))
-    }, [user.id_user]);
+        getBooks();
+    }, []);
 
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll w-full">
-            {/* <div className="flex flex-wrap justify-center gap-14 gap-y-20 py-20 px-4 md:px-20 w-full">
-                {books.map((book) => (
-                    <BookItem book={book} key={book.id_book} />
-                ))}
-            </div> */}
-            <BookList />
+            <BookList books={books} getBooks={getBooks} />
         </div>
     )
 }
