@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import useUserContext from "../../hooks/useUserContext";
 import { User } from "../../config/types";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     firstName: string,
@@ -13,6 +14,8 @@ type FormValues = {
 
 export default function EditProfileForm() {
 
+    const navigate = useNavigate();
+
     const { user, login } = useUserContext();
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
@@ -20,6 +23,12 @@ export default function EditProfileForm() {
     });
 
     const { errors, dirtyFields } = formState;
+
+    function goToProfile() {
+        setTimeout(() => {
+            navigate('/profile');
+        }, 600);
+    }
 
     async function onSubmit(data: FormValues) {
         const updatedUser: User = { ...data };
@@ -213,7 +222,10 @@ export default function EditProfileForm() {
                 }
             </div>
 
-            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
+            <button
+                className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold"
+                onClick={goToProfile}
+            >
                 Submit Data
             </button>
         </form>

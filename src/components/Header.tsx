@@ -26,14 +26,14 @@ export default function Header() {
                 <Menu />
             </div>
 
+            {user && <Avatar user={user} />}
+
             <button
-                className="md:hidden font-bold text-2xl text-blue-950 ml-auto mr-2"
+                className="md:hidden font-bold text-2xl text-blue-950 mr-2"
                 onClick={() => setIsOpenSidebar(!isOpenSidebar)}
             >
                 {isOpenSidebar ? <AiOutlineClose /> : <RxHamburgerMenu /> }
             </button>
-
-            {user && <Avatar user={user} />}
 
             {user && <button onClick={logout} className="font-semibold text-2xl md:text-xl text-blue-950 pl-2 flex items-center justify-center transition-all ease-in-out duration-300 hover:text-orange-400"><IoMdLogOut /></button>}
 

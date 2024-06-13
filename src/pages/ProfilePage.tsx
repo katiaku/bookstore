@@ -24,7 +24,7 @@ export default function ProfilePage() {
             </div>
 
             <div className="absolute top-0 z-10 w-full h-full flex flex-col lg:flex-row justify-center items-center p-4 lg:p-20 gap-20">
-                <div className="flex flex-col gap-8 justify-center items-center">
+                <div className="flex flex-col gap-8 lg:gap-10 justify-center items-center lg:w-1/3">
                     <div className="flex gap-4">
                         <p className="cursor-default text-white font-poppins text-center text-2xl">Welcome, <span className="text-orange-400">{user?.firstName} {user?.lastName}</span>!</p>
                         <button onClick={goToEditProfile}>
@@ -33,7 +33,7 @@ export default function ProfilePage() {
                             </a>
                         </button>
                     </div>
-                    <div className="w-[150px] h-[150px] bg-white rounded-full overflow-hidden">
+                    <div className="w-[150px] h-[150px] bg-transparent rounded-full overflow-hidden">
                         <img
                             src={user?.photo || '../../public/img/blank_profile_picture.webp'}
                             alt={`Photo of ${user?.firstName} ${user?.lastName}`}
