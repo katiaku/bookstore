@@ -13,14 +13,14 @@ export default function HomePage() {
                     <h1 className="cursor-default text-slate-200 text-6xl font-poppins font-bold leading-tight">Best Place To Get Your <span className="text-orange-400">Favourite</span> Books</h1>
                     <div className="flex flex-col md:flex-row gap-6 md:gap-8 font-poppins">
                         <button
-                            className="bg-orange-400 hover:scale-105 transition-all duration-300 border-2 px-4 py-[.6rem] w-full md:w-[10rem] border-orange-400 text-blue-950 font-semibold flex items-center justify-center gap-3"
+                            className="bg-orange-400 hover:scale-105 transition-all duration-300 border-[1px] py-[.6rem] w-full md:w-[9rem] border-orange-400 text-blue-950 flex items-center justify-center gap-2 rounded-full"
                             onClick={() => navigate("/register")}
                         >
                             Register
                             <BiPencil />
                         </button>
                         <button
-                            className="bg-transparent hover:scale-105 transition-all duration-300 border-2 px-4 py-[.6rem] w-full md:w-[10rem] border-orange-400 text-orange-400 font-semibold flex items-center justify-center gap-3"
+                            className="bg-transparent hover:scale-105 transition-all duration-300 border-[1px] py-[.6rem] w-full md:w-[9rem] border-orange-400 text-orange-400 flex items-center justify-center gap-2 rounded-full"
                             onClick={() => navigate("/login")}
                         >
                             Log In

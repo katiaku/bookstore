@@ -1,6 +1,7 @@
 import { RiEdit2Fill } from "react-icons/ri";
 import EditProfileForm from "../components/forms/EditProfileForm";
 import useUserContext from "../hooks/useUserContext";
+import Quote from "../components/Quote";
 
 export default function ProfilePage() {
 
@@ -16,7 +17,7 @@ export default function ProfilePage() {
                 />
             </div>
 
-            <div className="absolute top-0 z-10 w-full h-full flex flex-col lg:flex-row justify-center items-center gap-20">
+            <div className="absolute top-0 z-10 w-full h-full flex flex-col lg:flex-row justify-center items-center p-4 lg:p-20 gap-20">
                 <div className="flex flex-col gap-4 justify-center items-center">
                     <p className="cursor-default text-white font-poppins text-center text-2xl mb-4">Welcome, <span className="text-orange-400">{user?.firstName} {user?.lastName}</span>!</p>
                     <div className="w-[150px] h-[150px] bg-white rounded-full overflow-hidden">
@@ -26,12 +27,14 @@ export default function ProfilePage() {
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <button>
+                    <button className="self-end">
                         <a>
                             <RiEdit2Fill className="cursor-pointer text-white hover:text-orange-400 transition-all ease-in-out duration-300" />
                         </a>
                     </button>
                 </div>
+
+                <Quote />
                 {/* <EditProfileForm /> */}
             </div>
         </div>

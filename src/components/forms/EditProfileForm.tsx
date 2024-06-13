@@ -63,10 +63,13 @@ export default function EditProfileForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
+            <p className="text-slate-100 text-center mb-6 text-lg font-semibold">
+                Edit Profile
+            </p>
             <div className="flex flex-col">
                 <label
                     htmlFor="firstName"
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     First Name:
                 </label>
@@ -74,9 +77,9 @@ export default function EditProfileForm() {
                 <div className={
                         errors.firstName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -104,7 +107,7 @@ export default function EditProfileForm() {
             <div className="flex flex-col">
                 <label
                     htmlFor="lastName"
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     Last Name:
                 </label>
@@ -112,9 +115,9 @@ export default function EditProfileForm() {
                 <div className={
                         errors.lastName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -142,7 +145,7 @@ export default function EditProfileForm() {
             <div className="flex flex-col">
                 <label
                     htmlFor="email"
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     Email:
                 </label>
@@ -150,9 +153,9 @@ export default function EditProfileForm() {
                 <div className={
                         errors.email 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -180,7 +183,7 @@ export default function EditProfileForm() {
             <div className="flex flex-col">
                 <label
                     htmlFor="photo"
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     Photo URL:
                 </label>
@@ -188,9 +191,9 @@ export default function EditProfileForm() {
                 <div className={
                         errors.photo 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -215,7 +218,7 @@ export default function EditProfileForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-bold">
+            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
                 Submit Data
             </button>
         </form>

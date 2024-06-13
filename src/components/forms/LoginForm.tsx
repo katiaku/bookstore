@@ -63,7 +63,7 @@ export default function LoginForm() {
             <div className="flex flex-col">
                 <label
                     htmlFor="email"
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     Email:
                 </label>
@@ -74,9 +74,9 @@ export default function LoginForm() {
                     className={
                         errors.email
                         ?
-                        "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400"
+                        "rounded-md text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400"
                         :
-                        "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                        "rounded-md text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
                     }
                     {...register('email')}
                 />
@@ -94,7 +94,7 @@ export default function LoginForm() {
             <div className="flex flex-col">
                 <label 
                     htmlFor="password" 
-                    className="text-sm font-semibold"
+                    className="text-sm"
                 >
                     Password:
                 </label>
@@ -105,9 +105,9 @@ export default function LoginForm() {
                     className={
                         errors.password
                         ?
-                        "text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400"
+                        "rounded-md text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400"
                         :
-                        "text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
+                        "rounded-md text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
                     }
                     {...register('password')}
                 />
@@ -122,7 +122,7 @@ export default function LoginForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-bold">
+            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
                 Log In
             </button>
         </form>

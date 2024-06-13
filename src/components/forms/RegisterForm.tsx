@@ -62,16 +62,16 @@ export default function RegisterForm() {
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label htmlFor="firstName" className="text-sm font-semibold">
+                <label htmlFor="firstName" className="text-sm">
                     First Name:
                 </label>
                 
                 <div className={
                         errors.firstName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -97,16 +97,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="lastName" className="text-sm font-semibold">
+                <label htmlFor="lastName" className="text-sm">
                     Last Name:
                 </label>
                 
                 <div className={
                         errors.lastName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -132,16 +132,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="email" className="text-sm font-semibold">
+                <label htmlFor="email" className="text-sm">
                     Email:
                 </label>
 
                 <div className={
                         errors.email 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -167,16 +167,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="photo" className="text-sm font-semibold">
+                <label htmlFor="photo" className="text-sm">
                     Photo URL:
                 </label>
 
                 <div className={
                         errors.photo 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -202,16 +202,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="password" className="text-sm font-semibold">
+                <label htmlFor="password" className="text-sm">
                     Password:
                 </label>
 
                 <div className={
                         errors.password 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -239,16 +239,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="confirmPassword" className="text-sm font-semibold">
+                <label htmlFor="confirmPassword" className="text-sm">
                     Confirm Password:
                 </label>
 
                 <div className={
                         errors.confirmPassword 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -275,7 +275,7 @@ export default function RegisterForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-bold">
+            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
                 Submit Data
             </button>
         </form>
