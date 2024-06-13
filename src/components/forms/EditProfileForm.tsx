@@ -11,8 +11,6 @@ type FormValues = {
     photo: string,
 }
 
-// TODO: ajustar estilos de la página
-
 export default function EditProfileForm() {
 
     const { user, login } = useUserContext();
@@ -63,9 +61,6 @@ export default function EditProfileForm() {
             onSubmit={handleSubmit(onSubmit)}
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
-            <p className="text-slate-100 text-center mb-6 text-lg font-semibold">
-                Edit Profile
-            </p>
             <div className="flex flex-col">
                 <label
                     htmlFor="firstName"

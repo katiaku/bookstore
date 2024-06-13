@@ -1,11 +1,17 @@
 import { RiEdit2Fill } from "react-icons/ri";
-import EditProfileForm from "../components/forms/EditProfileForm";
 import useUserContext from "../hooks/useUserContext";
 import Quote from "../components/Quote";
+import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
 
+    const navigate = useNavigate();
+
     const { user } = useUserContext();
+
+    function goToEditProfile () {
+        navigate('/edit-profile');
+    }
 
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll flex flex-wrap justify-start">
@@ -27,7 +33,10 @@ export default function ProfilePage() {
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <button className="self-end">
+                    <button
+                        className="self-end"
+                        onClick={goToEditProfile}
+                    >
                         <a>
                             <RiEdit2Fill className="cursor-pointer text-white hover:text-orange-400 transition-all ease-in-out duration-300" />
                         </a>
@@ -35,7 +44,6 @@ export default function ProfilePage() {
                 </div>
 
                 <Quote />
-                {/* <EditProfileForm /> */}
             </div>
         </div>
     )

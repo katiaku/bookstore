@@ -15,6 +15,7 @@ import { Flip, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Error404 from './pages/Error404'
 import UserProvider from './providers/UserProvider'
+import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
 
           <Route element={<PrivateRoutes />}>
             <Route path='/profile' element={<ProfilePage />} />
+            <Route path='/edit-profile' element={<EditProfilePage />} />
             <Route path='/books' element={<BooksPage />} />
             <Route path='/add-book' element={<AddBookPage />} />
             <Route path='/edit-book' element={<EditBookPage />} />
