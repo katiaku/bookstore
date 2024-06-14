@@ -3,7 +3,7 @@ import AddBookForm from "../components/forms/AddBookForm";
 export default function AddBookPage() {
     return (
         <div className="relative bg-blue-950 page-height overflow-y-scroll">
-            <div className="w-full h-full overflow-hidden opacity-25 lg:opacity-100">
+            <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
                 <img className="h-full w-full object-cover" src="../../public/img/bg-6.avif" alt="" />
             </div>
 

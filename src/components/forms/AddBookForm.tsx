@@ -63,16 +63,16 @@ export default function AddBookForm() {
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label htmlFor="title" className="text-sm font-semibold">
+                <label htmlFor="title" className="text-sm">
                     Title:
                 </label>
 
                 <div className={
                         errors.title 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -98,16 +98,16 @@ export default function AddBookForm() {
             </div>
 
             <div className="flex flex-col relative">
-                <label htmlFor="author" className="text-sm font-semibold">
+                <label htmlFor="author" className="text-sm">
                     Author:
                 </label>
                 
                 <div className={
                         errors.author 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -133,16 +133,16 @@ export default function AddBookForm() {
             </div>
 
             <div className="flex flex-col relative">
-                <label htmlFor="type" className="text-sm font-semibold">
+                <label htmlFor="type" className="text-sm">
                     Book Type:
                 </label>
                 
                 <div className={
                         errors.type 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -168,16 +168,16 @@ export default function AddBookForm() {
             </div>
 
             <div className="flex flex-col relative">
-                <label htmlFor="photo" className="text-sm font-semibold">
+                <label htmlFor="photo" className="text-sm">
                     Photo URL:
                 </label>
                 
                 <div className={
                         errors.photo 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -203,16 +203,16 @@ export default function AddBookForm() {
             </div>
 
             <div className="flex flex-col relative">
-                <label htmlFor="price" className="text-sm font-semibold">
+                <label htmlFor="price" className="text-sm">
                     Price:
                 </label>
 
                 <div className={
                         errors.price 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -238,7 +238,7 @@ export default function AddBookForm() {
                 }
             </div>
             
-            <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
+            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
                 Submit Data
             </button>
         </form>

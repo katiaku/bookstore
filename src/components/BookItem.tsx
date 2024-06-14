@@ -14,7 +14,7 @@ export default function BookItem(props: BookItemProps) {
             const resp = await fetch(`http://localhost:3000/books?id_book=${book.id_book}`, { method: 'DELETE' });
             const json = await resp.json();
             
-            if (json.code === 200) {
+            if (json) {
                 toast.success("Book deleted successfully", {
                     position: "bottom-right",
                     theme: "colored"
@@ -39,7 +39,7 @@ export default function BookItem(props: BookItemProps) {
         <div className='font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200'>
             <div className='absolute shadow-md left-[15px] -top-[15px] max-h-[280px] overflow-hidden'>
                 <img
-                    src={ book.photo }
+                    src={ book.photo || '../../public/img/no_cover_available.png' }
                     alt={`The cover of ${ book.title } by ${ book.author }` }
                     width="170"
                 />
@@ -65,10 +65,10 @@ export default function BookItem(props: BookItemProps) {
                 </div>
 
                 <div className='self-end flex gap-2'>
-                    <button onClick={ deleteBook }>
+                    <button onClick={ editBook }>
                         <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
                     </button>
-                    <button onClick={ editBook }>
+                    <button onClick={ deleteBook }>
                         <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
                     </button>
                 </div>

@@ -1,7 +1,8 @@
 import { BiCheckCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import { User } from "../../config/types";
 import { toast } from "react-toastify";
+// import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     firstName: string,
@@ -14,48 +15,52 @@ type FormValues = {
 
 export default function RegisterForm() {
 
+    const navigate = useNavigate();
+
+    // const { login } = useUserContext();
+
     const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange"
     });
 
     const { errors, dirtyFields } = formState;
 
-    let newUser: User | null = null;
-
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        newUser = data;
-        handleSubmitUser(newUser);
-        reset();
+    function goToLogin() {
+        setTimeout(() => {
+            navigate('/login');
+        }, 600);
     }
 
-    function handleSubmitUser(submitData: User) {
+    async function onSubmit(data: FormValues) {
+        try {
+            const resp = await fetch('http://localhost:3000/register', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            });
+            
+            const json = await resp.json();
 
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(submitData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/register', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("User registered successfully", {
+            if (json) {
+                toast.success("User registered successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                // login(json)
+            }
+
+        } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
 
     const password = watch('password');
@@ -66,16 +71,16 @@ export default function RegisterForm() {
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label htmlFor="firstName" className="text-sm font-semibold">
+                <label htmlFor="firstName" className="text-sm">
                     First Name:
                 </label>
                 
                 <div className={
                         errors.firstName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -101,16 +106,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="lastName" className="text-sm font-semibold">
+                <label htmlFor="lastName" className="text-sm">
                     Last Name:
                 </label>
                 
                 <div className={
                         errors.lastName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -136,16 +141,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="email" className="text-sm font-semibold">
+                <label htmlFor="email" className="text-sm">
                     Email:
                 </label>
 
                 <div className={
                         errors.email 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -171,16 +176,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="photo" className="text-sm font-semibold">
+                <label htmlFor="photo" className="text-sm">
                     Photo URL:
                 </label>
 
                 <div className={
                         errors.photo 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -206,16 +211,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="password" className="text-sm font-semibold">
+                <label htmlFor="password" className="text-sm">
                     Password:
                 </label>
 
                 <div className={
                         errors.password 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -243,16 +248,16 @@ export default function RegisterForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="confirmPassword" className="text-sm font-semibold">
+                <label htmlFor="confirmPassword" className="text-sm">
                     Confirm Password:
                 </label>
 
                 <div className={
                         errors.confirmPassword 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -279,7 +284,10 @@ export default function RegisterForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
+            <button
+                className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold"
+                onClick={goToLogin}
+            >
                 Submit Data
             </button>
         </form>

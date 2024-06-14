@@ -31,10 +31,15 @@ type User = {
     password: string;
 };
 
+type AvatarProps = {
+    user: User;
+}
+
 export type {
     Book,
     BookItemProps,
     BookListProps,
     SidebarProps,
-    User
+    User,
+    AvatarProps
 };

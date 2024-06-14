@@ -1,7 +1,9 @@
 import { BiCheckCircle } from "react-icons/bi"; 
 import { useForm } from "react-hook-form";
-import { User } from "../../config/types";
 import { toast } from "react-toastify";
+import useUserContext from "../../hooks/useUserContext";
+import { User } from "../../config/types";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     firstName: string,
@@ -12,48 +14,55 @@ type FormValues = {
 
 export default function EditProfileForm() {
 
+    const navigate = useNavigate();
+
+    const { user, login } = useUserContext();
+
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange"
     });
 
     const { errors, dirtyFields } = formState;
 
-    let updatedUser: User | null = null;
-
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        updatedUser = data;
-        handleUpdateUser(updatedUser);
-        reset();
+    function goToProfile() {
+        setTimeout(() => {
+            navigate('/profile');
+        }, 600);
     }
 
-    function handleUpdateUser(submitData: User) {
+    async function onSubmit(data: FormValues) {
+        const updatedUser: User = { ...data };
 
-        const requestOptions = {
-            method: 'PUT',
-            body: JSON.stringify(submitData),
-            headers: {
-                'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/users', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("User profile updated successfully", {
+        if (user) updatedUser.id_user = user.id_user;
+        
+        try {
+            const resp = await fetch('http://localhost:3000/users', {
+                method: 'PUT',
+                body: JSON.stringify(updatedUser),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+        
+            const json = await resp.json();
+        
+            if (json) {
+                toast.success("User profile updated successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                login(updatedUser);
+            }
+            } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
     
     return (
@@ -62,16 +71,19 @@ export default function EditProfileForm() {
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label htmlFor="firstName" className="text-sm font-semibold">
+                <label
+                    htmlFor="firstName"
+                    className="text-sm"
+                >
                     First Name:
                 </label>
 
                 <div className={
                         errors.firstName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -97,16 +109,19 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="lastName" className="text-sm font-semibold">
+                <label
+                    htmlFor="lastName"
+                    className="text-sm"
+                >
                     Last Name:
                 </label>
 
                 <div className={
                         errors.lastName 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -132,16 +147,19 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="email" className="text-sm font-semibold">
+                <label
+                    htmlFor="email"
+                    className="text-sm"
+                >
                     Email:
                 </label>
 
                 <div className={
                         errors.email 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -167,16 +185,19 @@ export default function EditProfileForm() {
             </div>
 
             <div className="flex flex-col">
-                <label htmlFor="photo" className="text-sm font-semibold">
+                <label
+                    htmlFor="photo"
+                    className="text-sm"
+                >
                     Photo URL:
                 </label>
 
                 <div className={
                         errors.photo 
                         ?
-                        "flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
                         :
-                        "flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
+                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
                     }
                 >
                     <input
@@ -201,7 +222,10 @@ export default function EditProfileForm() {
                 }
             </div>
 
-            <button className="bg-orange-400 text-white px-4 py-[.8rem] mt-4 font-bold">
+            <button
+                className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold"
+                onClick={goToProfile}
+            >
                 Submit Data
             </button>
         </form>
