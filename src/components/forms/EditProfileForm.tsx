@@ -79,13 +79,7 @@ export default function EditProfileForm() {
                     First Name:
                 </label>
 
-                <div className={
-                        errors.firstName 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.firstName ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -117,13 +111,7 @@ export default function EditProfileForm() {
                     Last Name:
                 </label>
 
-                <div className={
-                        errors.lastName 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.lastName ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -155,13 +143,7 @@ export default function EditProfileForm() {
                     Email:
                 </label>
 
-                <div className={
-                        errors.email 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.email ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="email"
@@ -193,13 +175,7 @@ export default function EditProfileForm() {
                     Photo URL:
                 </label>
 
-                <div className={
-                        errors.photo 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"

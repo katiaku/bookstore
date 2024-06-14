@@ -74,13 +74,7 @@ export default function AddBookForm() {
                     Title:
                 </label>
 
-                <div className={
-                        errors.title 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.title ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -109,13 +103,7 @@ export default function AddBookForm() {
                     Author:
                 </label>
                 
-                <div className={
-                        errors.author 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.author ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -144,13 +132,7 @@ export default function AddBookForm() {
                     Book Type:
                 </label>
                 
-                <div className={
-                        errors.type 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.type ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -179,13 +161,7 @@ export default function AddBookForm() {
                     Photo URL:
                 </label>
                 
-                <div className={
-                        errors.photo 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -214,13 +190,7 @@ export default function AddBookForm() {
                     Price:
                 </label>
 
-                <div className={
-                        errors.price 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.price ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="number"

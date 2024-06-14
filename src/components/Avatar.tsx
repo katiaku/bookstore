@@ -15,7 +15,11 @@ export default function Avatar({ user }: AvatarProps) {
         onClick={goToProfile}
         >
             <div className="border border-white size-10 rounded-full overflow-hidden">
-                <img className="size-full object-cover" src={user.photo || '/img/avatar-placeholder.webp'} alt={`Photo of ${user?.firstName} ${user?.lastName}`} />
+                <img
+                    className="size-full object-cover"
+                    src={user.photo || '/img/avatar-placeholder.webp'}
+                    alt={`Photo of ${user?.firstName} ${user?.lastName}`}
+                />
             </div>
         </div>
     )

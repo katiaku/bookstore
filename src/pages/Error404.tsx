@@ -29,9 +29,15 @@ export default function Error404() {
             <div className="text-8xl mb-4 text-orange-400">
                 <FaRegSadTear />
             </div>
-            <h1 className="font-poppins font-semibold text-6xl mb-2">Error 404</h1>
-            <h2 className="font-poppins font-semibold text-3xl">Page Not Found</h2>
-            <p className="mt-8 text-lg">Redirecting to Home in { timer } seconds...</p>
+            <h1 className="font-poppins font-semibold text-6xl mb-4">
+                Error 404
+            </h1>
+            <h2 className="font-poppins font-semibold text-3xl">
+                Page Not Found
+            </h2>
+            <p className="mt-10 text-lg">
+                Redirecting to Home in { timer } seconds...
+            </p>
         </div>
     )
 }
