@@ -19,7 +19,8 @@ export default function EditProfileForm() {
     const { user, login } = useUserContext();
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onChange"
+        mode: "onChange",
+        defaultValues: user
     });
 
     const { errors, dirtyFields } = formState;

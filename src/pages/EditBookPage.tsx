@@ -4,7 +4,11 @@ export default function EditBookPage() {
     return (
         <div className="relative bg-blue-950 page-height overflow-y-scroll">
             <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
-                <img className="h-full w-full object-cover" src="../../public/img/bg-6.avif" alt="" />
+                <img
+                    className="h-full w-full object-cover"
+                    src="../../public/img/bg-6.avif"
+                    alt=""
+                />
             </div>
 
             <div className="overflow-hidden absolute top-0 z-10 w-full h-full flex justify-center items-center">

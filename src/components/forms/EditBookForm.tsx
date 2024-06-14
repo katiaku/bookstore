@@ -1,7 +1,7 @@
 import { BiCheckCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
-import { Book } from "../../config/types";
 import { toast } from "react-toastify";
+import { useLocation, useNavigate } from "react-router-dom";
 
 type FormValues = {
     title: string,
@@ -11,50 +11,54 @@ type FormValues = {
     price: number
 }
 
+type EditBookDataType = {
+    id_book: number;
+} & FormValues;
+
 export default function EditBookForm() {
 
+    const { state: book } = useLocation();
+    const navigate = useNavigate();
+
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onSubmit"
+        mode: "onChange",
+        defaultValues: book
     });
 
     const { errors, dirtyFields } = formState;
 
-    let updatedBook: Book | null = null;
+    async function onSubmit(data: FormValues) {
+        const editBookData: EditBookDataType = { ...data, id_book: book.id_book};
 
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
-
-        updatedBook = data;
-        handleUpdateBook(updatedBook);
-        reset();
-    }
-
-    function handleUpdateBook(submitData: Book) {
-
-        const requestOptions = {
-            method: 'PUT',
-            body: JSON.stringify(submitData),
-            headers: {
+        try {
+            const resp = await fetch('http://localhost:3000/books', {
+                method: 'PUT',
+                body: JSON.stringify(editBookData),
+                headers: {
                 'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/books', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("Book updated successfully", {
+                }
+            });
+            
+            const json = await resp.json();
+        
+            if (json) {
+                toast.success("Book updated successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                navigate('/books');
+            }
+        
+            } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+        reset();
     }
 
     return (
@@ -239,7 +243,7 @@ export default function EditBookForm() {
             </div>
             
             <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
-                <a className="w-full h-full" href="/books">Submit Data</a>
+                <a className="w-full h-full">Submit Data</a>
             </button>
         </form>
     )
