@@ -1,15 +1,19 @@
+import { CgCloseO } from "react-icons/cg"; 
 import { BsWikipedia } from "react-icons/bs"; 
 import { AiFillStar } from "react-icons/ai"; 
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { BookItemProps } from "../config/types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export default function BookItem(props: BookItemProps) {
 
     const { book, getBooks } = props;
 
     const navigate = useNavigate();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     async function deleteBook () {
         try {
@@ -37,9 +41,13 @@ export default function BookItem(props: BookItemProps) {
         navigate('/edit-book', { state: book });
     }
 
-    // function seeCover {
+    function openModal() {
+        setIsModalOpen(true);
+    }
 
-    // }
+    function closeModal() {
+        setIsModalOpen(false);
+    }
 
     return (
         <div className='font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200'>
@@ -48,7 +56,7 @@ export default function BookItem(props: BookItemProps) {
                     src={ book.photo || '../../public/img/no_cover_available.png' }
                     alt={`The cover of ${ book.title } by ${ book.author }` }
                     width="170"
-                    // onClick={seeCover}
+                    onClick={openModal}
                 />
             </div>
 
@@ -78,7 +86,7 @@ export default function BookItem(props: BookItemProps) {
                     </span>
                 </div>
 
-                <div className='self-end flex gap-2'>
+                <div className='self-end flex gap-2 text-sm'>
                     <a
                         href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(book.title)}`} 
                         target="_blank" 
@@ -94,6 +102,25 @@ export default function BookItem(props: BookItemProps) {
                     </button>
                 </div>
             </div>
+
+            {isModalOpen && (
+                <div className="fixed inset-0 h-screen w-screen bg-blue-950 flex items-center justify-center z-50 p-10">
+                    <div className="w-content h-content text-right">
+                        <button
+                            className="mb-4 text-xl text-white hover:text-orange-400 transition-all ease-in-out duration-300"
+                            onClick={closeModal}
+                        >
+                            <CgCloseO />
+                        </button>
+                        <div className="w-auto md:w-[450px]">
+                            <img
+                                src={book.photo || '../../public/img/no_cover_available.png'}
+                                alt={`The cover of ${book.title} by ${book.author}`}
+                            />
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
