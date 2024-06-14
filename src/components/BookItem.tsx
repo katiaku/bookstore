@@ -1,4 +1,4 @@
-import { RiAmazonFill } from "react-icons/ri"; 
+import { BsWikipedia } from "react-icons/bs"; 
 import { AiFillStar } from "react-icons/ai"; 
 import { RiDeleteBin5Fill, RiEdit2Fill } from "react-icons/ri";
 import { BookItemProps } from "../config/types";
@@ -52,8 +52,8 @@ export default function BookItem(props: BookItemProps) {
                 />
             </div>
 
-            <div className='cursor-default bg-slate-200/70 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] md:pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
-                <div className="w-[185px] text-wrap overflow-hidden flex flex-col gap-2">
+            <div className='cursor-default bg-slate-200/70 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
+                <div className="w-[170px] md:w-[185px] text-wrap overflow-hidden flex flex-col gap-2 md:pl-2">
                     <p className='font-nunito font-bold text-2xl text-slate-700'>
                         { book.title }
                     </p>
@@ -79,9 +79,13 @@ export default function BookItem(props: BookItemProps) {
                 </div>
 
                 <div className='self-end flex gap-2'>
-                    <button onClick={ deleteBook }>
-                        <RiAmazonFill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
-                    </button>
+                    <a
+                        href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(book.title)}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                    >
+                        <BsWikipedia className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                    </a>
                     <button onClick={ editBook }>
                         <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
                     </button>
