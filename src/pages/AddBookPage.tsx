@@ -1,6 +1,7 @@
 import AddBookForm from "../components/forms/AddBookForm";
 
 export default function AddBookPage() {
+
     return (
         <div className="relative bg-blue-950 page-height overflow-y-scroll">
             <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
