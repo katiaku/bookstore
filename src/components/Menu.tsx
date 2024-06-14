@@ -5,6 +5,8 @@ export default function Menu() {
 
     const { user } = useUserContext();
 
+    // TODO: header is not updated when user changes
+
     return (
         <nav className="py-20 md:py-0 flex flex-col md:flex-row md:w-1/2 h-full mx-auto justify-center items-center font-semibold uppercase font-poppins text-xl md:text-base gap-0">
             <NavLink

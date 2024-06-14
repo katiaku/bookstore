@@ -41,6 +41,7 @@ export default function LoginForm() {
             });
 
             login(json);
+            navigate("/profile");
         
         } catch (error) {
             if (error instanceof Error) {
@@ -50,9 +51,8 @@ export default function LoginForm() {
                 });
                 console.log(error);
             }
+            reset();
         }
-        reset();
-        navigate("/profile");
     }
 
     return (

@@ -11,7 +11,7 @@ export default function Avatar({ user }: AvatarProps) {
 
     return (
         <div
-        className="flex flex-col items-center ml-auto mr-8 md:mr-2 lg:mr-4 cursor-pointer"
+        className="flex flex-col items-center ml-auto mr-4 md:mr-2 lg:mr-4 cursor-pointer"
         onClick={goToProfile}
         >
             <div className="border border-white size-10 rounded-full overflow-hidden">

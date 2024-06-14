@@ -29,7 +29,7 @@ export default function ProfilePage() {
                         <p className="cursor-default text-white font-poppins text-center text-2xl">Welcome, <span className="text-orange-400">{user?.firstName} {user?.lastName}</span>!</p>
                         <button onClick={goToEditProfile}>
                             <a>
-                                <RiEdit2Fill className="cursor-pointer text-white hover:text-orange-400 transition-all ease-in-out duration-300" />
+                                <RiEdit2Fill className="text-base cursor-pointer text-white hover:text-orange-400 transition-all ease-in-out duration-300" />
                             </a>
                         </button>
                     </div>

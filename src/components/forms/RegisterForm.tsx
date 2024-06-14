@@ -1,7 +1,8 @@
 import { BiCheckCircle } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import useUserContext from "../../hooks/useUserContext";
+// import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     firstName: string,
@@ -14,13 +15,21 @@ type FormValues = {
 
 export default function RegisterForm() {
 
-    const { login } = useUserContext();
+    const navigate = useNavigate();
+
+    // const { login } = useUserContext();
 
     const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
         mode: "onChange"
     });
 
     const { errors, dirtyFields } = formState;
+
+    function goToLogin() {
+        setTimeout(() => {
+            navigate('/login');
+        }, 600);
+    }
 
     async function onSubmit(data: FormValues) {
         try {
@@ -39,7 +48,7 @@ export default function RegisterForm() {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                login(json)
+                // login(json)
             }
 
         } catch (error) {
@@ -275,7 +284,10 @@ export default function RegisterForm() {
                 }
             </div>
 
-            <button className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold">
+            <button
+                className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold"
+                onClick={goToLogin}
+            >
                 Submit Data
             </button>
         </form>

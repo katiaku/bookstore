@@ -54,7 +54,7 @@ export default function Quote() {
                         <p>{quote.content}</p>
                         <button onClick={() => handleCopy(quote.content)}>
                             <a>
-                                <BiCopy className="cursor-pointer text-white hover:text-orange-400 transition-all ease-in-out duration-300" />
+                                <BiCopy className="cursor-pointer text-white text-base hover:text-orange-400 transition-all ease-in-out duration-300" />
                             </a>
                         </button>
                     </div>
