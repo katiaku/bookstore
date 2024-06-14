@@ -71,13 +71,7 @@ export default function LoginForm() {
                     type="email"
                     id="email"
                     placeholder="email@email.com"
-                    className={
-                        errors.email
-                        ?
-                        "rounded-md text-sm bg-transparent border-[1px] border-red-400 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-red-400"
-                        :
-                        "rounded-md text-sm bg-transparent border-[1px] border-slate-200 py-2 px-4 focus:outline-none focus:ring-1 focus:ring-slate-200"
-                    }
+                    className={`rounded-md text-sm bg-transparent border-[1px] py-2 px-4 focus:outline-none focus:ring-1 ${errors.email ? "border-red-400 focus:ring-red-400" : "border-slate-200 focus:ring-slate-200"}`}
                     {...register('email')}
                 />
                 { 

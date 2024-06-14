@@ -1,7 +1,8 @@
 import { BiCheckCircle } from "react-icons/bi";  
 import { useForm } from "react-hook-form";
-import { Book } from "../../config/types";
 import { toast } from "react-toastify";
+import useUserContext from "../../hooks/useUserContext";
+import { useNavigate } from "react-router-dom";
 
 type FormValues = {
     title: string,
@@ -11,7 +12,15 @@ type FormValues = {
     price: number
 }
 
+type AddBookDataType = {
+    id_user?: number;
+} & FormValues
+
 export default function AddBookForm() {
+
+    const { user } = useUserContext();
+
+    const navigate = useNavigate();
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onChange"
@@ -19,42 +28,40 @@ export default function AddBookForm() {
 
     const { errors, dirtyFields } = formState;
 
-    let newBook: Book | null = null;
+    async function onSubmit(data: FormValues) {
 
-    function onSubmit(data: FormValues) {
-        console.log('submitted', data);
+        const addBookData: AddBookDataType = { ...data, id_user: user?.id_user };
 
-        newBook = data;
-        handleSubmitBook(newBook);
-        reset();
-    }
-
-    function handleSubmitBook(submitData: Book) {
-
-        const requestOptions = {
-            method: 'POST',
-            body: JSON.stringify(submitData),
-            headers: {
+        try {
+            const resp = await fetch('http://localhost:3000/books', {
+                method: 'POST',
+                body: JSON.stringify(addBookData),
+                headers: {
                 'Content-type': 'application/json'
-            }
-        };
-
-        fetch('http://localhost:3000/books', requestOptions)
-            .then(resp => {
-                if (resp.ok) toast.success("Book added successfully", {
+                }
+            });
+            
+            const json = await resp.json();
+        
+            if (json) {
+                toast.success("Book added successfully", {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                return resp.json();
-            })
-            .then(data => console.log(data))
-            .catch(error => {
+                navigate('/books');
+            }
+        
+            } catch (error) {
+            if (error instanceof Error) {
                 toast.error("There was an error...", {
                     position: "bottom-right",
                     theme: "colored"
                 });
                 console.log(error);
-            });
+            }
+        }
+
+        reset();
     }
 
     return (
@@ -67,13 +74,7 @@ export default function AddBookForm() {
                     Title:
                 </label>
 
-                <div className={
-                        errors.title 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.title ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -102,13 +103,7 @@ export default function AddBookForm() {
                     Author:
                 </label>
                 
-                <div className={
-                        errors.author 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.author ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -137,13 +132,7 @@ export default function AddBookForm() {
                     Book Type:
                 </label>
                 
-                <div className={
-                        errors.type 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.type ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -172,13 +161,7 @@ export default function AddBookForm() {
                     Photo URL:
                 </label>
                 
-                <div className={
-                        errors.photo 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="text"
@@ -207,13 +190,7 @@ export default function AddBookForm() {
                     Price:
                 </label>
 
-                <div className={
-                        errors.price 
-                        ?
-                        "rounded-md flex items-center justify-between border-[1px] border-red-400 py-0 px-0 text-sm bg-transparent"
-                        :
-                        "rounded-md flex items-center justify-between border-[1px] border-slate-200 py-0 px-0 text-sm bg-transparent"
-                    }
+                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.price ? " border-red-400" : "border-slate-200"}`}
                 >
                     <input
                         type="number"

@@ -6,6 +6,7 @@ type Book = {
     photo: string;
     price: number;
     type: string;
+    rating?: number;
 };
 
 type BookItemProps = {
