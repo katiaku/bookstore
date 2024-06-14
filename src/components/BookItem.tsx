@@ -15,6 +15,8 @@ export default function BookItem(props: BookItemProps) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const [rating, setRating] = useState(book.rating || 0);
+
     async function deleteBook () {
         try {
             const resp = await fetch(`http://localhost:3000/books?id_book=${book.id_book}`, { method: 'DELETE' });
@@ -49,6 +51,27 @@ export default function BookItem(props: BookItemProps) {
         setIsModalOpen(false);
     }
 
+    async function handleRating(starValue: number) {
+        try {
+            const resp = await fetch(`http://localhost:3000/rating`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ id_book: book.id_book, rating: starValue })
+            });
+            const json = await resp.json();
+            
+            if (json) {
+                setRating(starValue);
+                getBooks();
+            }
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <div className='font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200'>
             <div className='cursor-pointer absolute shadow-md left-[15px] -top-[15px] max-h-[280px] overflow-hidden'>
@@ -72,11 +95,13 @@ export default function BookItem(props: BookItemProps) {
                         { book.type }
                     </p>
                     <p className="flex">
-                        <AiFillStar className="text-slate-500 cursor-pointer" />
-                        <AiFillStar className="text-slate-500 cursor-pointer" />
-                        <AiFillStar className="text-slate-500 cursor-pointer" />
-                        <AiFillStar className="text-slate-500 cursor-pointer" />
-                        <AiFillStar className="text-slate-500 cursor-pointer" />
+                        {[1, 2, 3, 4, 5].map((starValue) => (
+                            <AiFillStar
+                                key={starValue}
+                                className={`cursor-pointer ${starValue <= rating ? 'text-orange-400' : 'text-slate-500'}`}
+                                onClick={() => handleRating(starValue)}
+                            />
+                        ))}
                     </p>
                 </div>
 
@@ -86,7 +111,7 @@ export default function BookItem(props: BookItemProps) {
                     </span>
                 </div>
 
-                <div className='self-end flex gap-2 text-sm'>
+                <div className='self-end flex gap-3 text-sm'>
                     <a
                         href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(book.title)}`} 
                         target="_blank" 
