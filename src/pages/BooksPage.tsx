@@ -91,7 +91,6 @@ export default function BooksPage() {
             const json = await resp.json();
             setBooks(json);
             setSuggestions([]);
-            //setSearchQuery(title);
             setSearchQuery("");
         } catch (error) {
             if (error instanceof Error) {
@@ -106,54 +105,55 @@ export default function BooksPage() {
 
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll w-full flex flex-col items-center">
-            
-            <div className="relative">
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => {
-                        setSearchQuery(e.target.value);
-                        searchBooks(e.target.value);
-                    }}
-                    placeholder="Search by title or author"
-                    className="text-black"
-                />
-                {suggestions.length > 0 && (
-                    <ul className="absolute bg-white border">
-                        {suggestions.map((suggestion, index) => (
-                            <li
-                                key={index}
-                                onClick={() => selectSuggestion(suggestion)}
-                                className="cursor-pointer hover:bg-gray-200 p-2"
-                            >
-                                {suggestion}
-                            </li>
-                        ))}
-                    </ul>
-                )}
-            </div>
-            
-            <div className="flex gap-3 text-xs mt-10">
-                <div className="flex gap-3 text-orange-400">
-                    {[5, 4, 3, 2, 1].map((rating) => (
-
-                            <button
-                                className="flex gap-1 items-center text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-[.4rem] transition-all ease-in-out duration-300"
-                                key={rating}
-                                onClick={() => findByRating(rating)}
-                            >
-                                <p>{rating}</p>
-                                <AiFillStar/>
-                            </button>
-
-                    ))}
+            <div className="md:w-full md:px-8 flex flex-col md:flex-row justify-center md:justify-between gap-4 text-xs mt-10 md:mt-6">
+                <div className="relative w-full md:w-[300px]">
+                    <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => {
+                            setSearchQuery(e.target.value);
+                            searchBooks(e.target.value);
+                        }}
+                        placeholder="Search by title or author"
+                        className="text-slate-200 w-full rounded-md text-sm bg-transparent border-[1px] py-2 px-4 focus:outline-none border-slate-200"
+                    />
+                    {suggestions.length > 0 && (
+                        <ul className="absolute bg-blue-950 text-slate-200 border-[1px] rounded-md text-sm p-2 border-slate-200 z-10 mt-4">
+                            {suggestions.map((suggestion, index) => (
+                                <li
+                                    key={index}
+                                    onClick={() => selectSuggestion(suggestion)}
+                                    className="cursor-pointer hover:bg-slate-200 p-2 hover:text-blue-950"
+                                >
+                                    {suggestion}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </div>
-                <button
-                    className="text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-2 transition-all ease-in-out duration-300"
-                    onClick={getBooks}
-                >
-                    All
-                </button>
+
+                <div className="flex gap-3 items-center">
+                    <div className="flex items-center gap-3 text-orange-400">
+                        {[5, 4, 3, 2, 1].map((rating) => (
+
+                                <button
+                                    className="flex gap-1 items-center text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-[.4rem] transition-all ease-in-out duration-300"
+                                    key={rating}
+                                    onClick={() => findByRating(rating)}
+                                >
+                                    <p>{rating}</p>
+                                    <AiFillStar/>
+                                </button>
+
+                        ))}
+                    </div>
+                    <button
+                        className="text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-2 transition-all ease-in-out duration-300"
+                        onClick={getBooks}
+                    >
+                        All
+                    </button>
+                </div>
             </div>
 
             <BookList books={books} getBooks={getBooks} />
