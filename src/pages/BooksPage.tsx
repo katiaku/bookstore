@@ -10,6 +10,9 @@ export default function BooksPage() {
     const [books, setBooks] = useState<Book[]>([]);
     const { user } = useUserContext();
 
+    const [searchQuery, setSearchQuery] = useState("");
+    const [suggestions, setSuggestions] = useState<string[]>([]);
+
     async function getBooks () {
         try {
             const resp = await fetch(`http://localhost:3000/books?id_user=${user?.id_user}`);
@@ -36,7 +39,7 @@ export default function BooksPage() {
 
     async function findByRating (rating: number) {
         try {
-            const resp = await fetch(`http://localhost:3000/find`, {
+            const resp = await fetch(`http://localhost:3000/rating`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -60,14 +63,82 @@ export default function BooksPage() {
         }
     }
 
+    async function searchBooks(query: string) {
+        if (!query) {
+            setSuggestions([]);
+            return;
+        }
+        try {
+            const resp = await fetch(`http://localhost:3000/search?id_user=${user?.id_user}&query=${query}`);
+            const json = await resp.json();
+            const titlesAndAuthors = json.map((book: Book) => `${book.title} by ${book.author}`);
+            setSuggestions(titlesAndAuthors);
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error.message);
+            }
+        }
+    }
+
+    async function selectSuggestion(suggestion: string) {
+        try {
+            const [title, author] = suggestion.split(' by ');
+            const resp = await fetch(`http://localhost:3000/search?id_user=${user?.id_user}&query=${title}`);
+            const json = await resp.json();
+            setBooks(json);
+            setSuggestions([]);
+            //setSearchQuery(title);
+            setSearchQuery("");
+        } catch (error) {
+            if (error instanceof Error) {
+                toast.error("There was an error...", {
+                    position: "bottom-right",
+                    theme: "colored"
+                });
+                console.log(error.message);
+            }
+        }
+    }
+
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll w-full flex flex-col items-center">
-            <div className="flex gap-3 text-xs md:self-end mt-4 mr-4 lg:mt-8 lg:mr-8">
+            
+            <div className="relative">
+                <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => {
+                        setSearchQuery(e.target.value);
+                        searchBooks(e.target.value);
+                    }}
+                    placeholder="Search by title or author"
+                    className="text-black"
+                />
+                {suggestions.length > 0 && (
+                    <ul className="absolute bg-white border">
+                        {suggestions.map((suggestion, index) => (
+                            <li
+                                key={index}
+                                onClick={() => selectSuggestion(suggestion)}
+                                className="cursor-pointer hover:bg-gray-200 p-2"
+                            >
+                                {suggestion}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+            
+            <div className="flex gap-3 text-xs mt-10">
                 <div className="flex gap-3 text-orange-400">
                     {[5, 4, 3, 2, 1].map((rating) => (
 
                             <button
-                                className="flex gap-1 items-center text-slate-100 hover:text-orange-400 border-[1px] border-slate-100 hover:border-orange-400 rounded-lg px-2 transition-all ease-in-out duration-300"
+                                className="flex gap-1 items-center text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-[.4rem] transition-all ease-in-out duration-300"
                                 key={rating}
                                 onClick={() => findByRating(rating)}
                             >
@@ -78,12 +149,13 @@ export default function BooksPage() {
                     ))}
                 </div>
                 <button
-                    className="text-slate-100 hover:text-orange-400 border-[1px] border-slate-100 hover:border-orange-400 rounded-lg px-2 transition-all ease-in-out duration-300"
+                    className="text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-2 transition-all ease-in-out duration-300"
                     onClick={getBooks}
                 >
                     All
                 </button>
             </div>
+
             <BookList books={books} getBooks={getBooks} />
         </div>
     )
