@@ -53,8 +53,8 @@ export default function BookItem(props: BookItemProps) {
 
     async function handleRating(starValue: number) {
         try {
-            const resp = await fetch(`http://localhost:3000/rating`, {
-                method: 'PUT',
+            const resp = await fetch(`http://localhost:3000/books`, {
+                method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
                 },
