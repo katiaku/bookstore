@@ -21,6 +21,7 @@ type BookListProps = {
 
 type SidebarProps = {
     isOpenSidebar: boolean;
+    setIsOpenSidebar: () => void;
 };
 
 type User = {

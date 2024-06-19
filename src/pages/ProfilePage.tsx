@@ -14,17 +14,10 @@ export default function ProfilePage() {
     }
 
     return (
-        <div className="bg-blue-950 page-height overflow-y-scroll flex flex-wrap justify-start">
-            <div className="w-full h-full overflow-hidden opacity-25">
-                <img
-                    className="h-full w-full object-cover"
-                    src="../../public/img/bg-7.avif"
-                    alt=""
-                />
-            </div>
+        <div className="relative bg-blue-950 page-height overflow-y-scroll flex flex-wrap justify-start">
+            <div className="z-10 w-full lg:w-1/2 h-full flex flex-col justify-center items-center p-8 gap-20">
 
-            <div className="absolute top-0 z-10 w-full h-full flex flex-col lg:flex-row justify-center items-center p-4 lg:p-20 gap-20">
-                <div className="flex flex-col gap-8 lg:gap-10 justify-center items-center lg:w-1/3">
+                <div className="flex flex-col gap-10 justify-center items-center">
                     <div className="flex gap-4">
                         <p className="cursor-default text-white font-poppins text-center text-2xl">Welcome, <span className="text-orange-400">{user?.firstName} {user?.lastName}</span>!</p>
                         <button onClick={goToEditProfile}>
@@ -33,6 +26,7 @@ export default function ProfilePage() {
                             </a>
                         </button>
                     </div>
+
                     <div className="w-[150px] h-[150px] bg-transparent rounded-full overflow-hidden">
                         <img
                             src={user?.photo || '../../public/img/blank_profile_picture.webp'}
@@ -40,9 +34,18 @@ export default function ProfilePage() {
                             className="w-full h-full object-cover"
                         />
                     </div>
+
+                    <Quote />
                 </div>
 
-                <Quote />
+            </div>
+
+            <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
+                <img
+                    className="h-full w-full object-cover"
+                    src="../../public/img/bg-7.avif"
+                    alt=""
+                />
             </div>
         </div>
     )
