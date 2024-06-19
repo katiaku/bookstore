@@ -123,7 +123,7 @@ export default function BooksPage() {
                                 <li
                                     key={index}
                                     onClick={() => selectSuggestion(suggestion)}
-                                    className="cursor-pointer hover:bg-slate-200 p-2 hover:text-blue-950"
+                                    className="cursor-pointer hover:bg-slate-200 p-2 rounded-md hover:text-blue-950"
                                 >
                                     {suggestion}
                                 </li>
