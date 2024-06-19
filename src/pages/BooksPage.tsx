@@ -1,3 +1,4 @@
+import { BiSearch } from "react-icons/bi"; 
 import { useEffect, useState } from "react";
 import { Book } from "../config/types";
 import BookList from "../components/BookList";
@@ -105,25 +106,32 @@ export default function BooksPage() {
 
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll w-full flex flex-col items-center">
-            <div className="md:w-full md:px-8 flex flex-col md:flex-row justify-center md:justify-between gap-4 text-xs mt-10 md:mt-6">
+            <div className="text-slate-200 mt-8 px-8 md:self-start cursor-default">
+                { books.length === 1 ? <p>Results: found {books.length} book.</p> : <p>Results: found {books.length} books.</p> }
+            </div>
+            
+            <div className="md:w-full md:px-8 flex flex-col md:flex-row justify-center md:justify-between gap-4 text-xs mt-6">
                 <div className="relative w-full md:w-[300px]">
-                    <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => {
-                            setSearchQuery(e.target.value);
-                            searchBooks(e.target.value);
-                        }}
-                        placeholder="Search by title or author"
-                        className="text-slate-200 w-full rounded-md text-sm bg-transparent border-[1px] py-2 px-4 focus:outline-none border-slate-200"
-                    />
+                    <div className="flex justify-between items-center gap-4 text-slate-200 w-full rounded-md bg-transparent border-[1px] py-2 px-4 focus:outline-none border-slate-200">
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e) => {
+                                setSearchQuery(e.target.value);
+                                searchBooks(e.target.value);
+                            }}
+                            placeholder="Search by title or author"
+                            className="w-full h-full bg-transparent focus:outline-none text-sm"
+                        />
+                        <BiSearch className="text-lg" />
+                    </div>
                     {suggestions.length > 0 && (
                         <ul className="absolute bg-blue-950 text-slate-200 border-[1px] rounded-md text-sm p-2 border-slate-200 z-10 mt-4">
                             {suggestions.map((suggestion, index) => (
                                 <li
                                     key={index}
                                     onClick={() => selectSuggestion(suggestion)}
-                                    className="cursor-pointer hover:bg-slate-200 p-2 hover:text-blue-950"
+                                    className="cursor-pointer hover:bg-slate-200 p-2 rounded-md hover:text-blue-950"
                                 >
                                     {suggestion}
                                 </li>

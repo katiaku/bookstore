@@ -12,7 +12,6 @@ import Avatar from "./Avatar";
 export default function Header() {
 
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
-
     const { user, logout } = useUserContext();
 
     // TODO: header is not updated when user changes
@@ -52,7 +51,10 @@ export default function Header() {
                         exit={{ opacity: 0 }}
                         transition={{ ease: "easeInOut", duration: 0.5 }}
                     >
-                        <Sidebar isOpenSidebar={isOpenSidebar} />
+                        <Sidebar
+                            isOpenSidebar={ isOpenSidebar }
+                            setIsOpenSidebar={ setIsOpenSidebar }
+                        />
                     </motion.div>
                 }
             </AnimatePresence>

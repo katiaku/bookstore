@@ -44,11 +44,11 @@ export default function Quote() {
     }, []);
 
     return (
-        <div className=" lg:w-1/2 cursor-default bg-transparent font-nunito text-slate-100 text-xl border-y-[1px] mx-4 px-4 py-8">
+        <div className="cursor-default bg-transparent max-width-[100px] font-nunito text-slate-100 mx-4 px-4 py-6 border-y-[1px]">
             {quotes.map(quote => 
                 <div
                     key={quote._id}
-                    className="flex flex-col justify-start align-center gap-4"
+                    className="flex flex-col justify-start align-center gap-4 max-width-[100px]"
                 >
                     <div className="flex gap-2">
                         <p>{quote.content}</p>

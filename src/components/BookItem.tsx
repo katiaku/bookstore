@@ -83,9 +83,9 @@ export default function BookItem(props: BookItemProps) {
                 />
             </div>
 
-            <div className='cursor-default bg-slate-200/70 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
-                <div className="w-[170px] md:w-[185px] text-wrap overflow-hidden flex flex-col gap-2 md:pl-2">
-                    <p className='font-nunito font-bold text-2xl text-slate-700'>
+            <div className='cursor-default bg-slate-200 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] pr-[15px] md:pl-0 flex flex-col justify-between items-start'>
+                <div className="w-[170px] md:w-[185px] text-wrap overflow-hidden flex flex-col gap-2 pr-6 md:pr-0 md:pl-2">
+                    <p className='font-nunito font-bold text-xl md:text-2xl text-slate-700'>
                         { book.title }
                     </p>
                     <p className='text-xs italic text-slate-700'>

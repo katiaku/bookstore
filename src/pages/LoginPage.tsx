@@ -12,7 +12,7 @@ export default function LoginPage() {
             </div>
 
             <div className="absolute top-0 z-10 w-full h-full flex flex-col justify-center items-center">
-                <h1 className="text-white font-poppins text-center text-2xl mb-8">
+                <h1 className="text-white font-poppins text-center text-2xl mb-8 mx-8">
                     We've been missing you.
                     <br />
                     Log in to your <span className="text-orange-400">BookShelve</span> account!
