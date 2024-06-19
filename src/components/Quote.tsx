@@ -44,7 +44,7 @@ export default function Quote() {
     }, []);
 
     return (
-        <div className="cursor-default bg-transparent max-width-[100px] font-nunito text-slate-100 mx-4 px-4 py-6 border-y-[1px]">
+        <div className="cursor-default bg-transparent max-width-[100px] text-base font-nunito text-slate-100 mx-4 px-4 py-6 border-y-[1px]">
             {quotes.map(quote => 
                 <div
                     key={quote._id}

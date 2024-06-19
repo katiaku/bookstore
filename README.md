@@ -1,30 +1,43 @@
-# React + TypeScript + Vite
+# BookShelve
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+Welcome to BookShelve, a comprehensive application designed to enhance your book collection experience. Built with a modern tech stack including React, TypeScript, Tailwind CSS, Framer Motion, MySQL, and Node.js, BookShelve offers a seamless and interactive platform for managing and discovering books.
 
-Currently, two official plugins are available:
+## Note
+This is frontend part of BookShelve app. For the backend go to https://github.com/katiaku/apiBooks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+### User Authentication:
+* Login and register
+### User Profile:
+* View and edit user profile
+* Unique quote on profile (copy text and check author on Wikipedia)
+### Book Collection Management:
+* Create and manage your collection of books
+* Add books with details such as title, author, image, and price
+* Rate books
+* Edit and delete book entries
+### Book Information:
+* Read about books on Wikipedia
+### Search and Filter:
+* Search books by title, author, and rating
 
-## Expanding the ESLint configuration
+## Tech Stack
+* React
+* TypeScript
+* Tailwind CSS
+* Framer Motion
+* Node.js
+* MySQL
+* Vite
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Usage
+* Clone the repository
+* Install dependencies with `npm install`
+* Run the application locally with `npm run dev`
+* Access the application in your browser at http://localhost:3000
 
-- Configure the top-level `parserOptions` property like this:
+## Feedback and Contributions
+Any suggestions, feedback, or contributions to improve BookShelve are welcomed. Feel free to open an issue or pull request.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Thank you for using BookShelve! Happy reading!
