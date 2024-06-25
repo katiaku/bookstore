@@ -1,4 +1,5 @@
-import LoginForm from "../components/forms/LoginForm"
+import LoginForm from "../components/forms/LoginForm";
+import bgImage from "../../public/img/bg-5.avif";
 
 export default function LoginPage() {
     return (
@@ -6,7 +7,7 @@ export default function LoginPage() {
             <div className="w-full h-full overflow-hidden opacity-25">
                 <img
                     className="h-full w-full object-cover"
-                    src="../../public/img/bg-5.avif"
+                    src={bgImage}
                     alt=""
                 />
             </div>

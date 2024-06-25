@@ -1,4 +1,5 @@
 import EditBookForm from "../components/forms/EditBookForm";
+import bgImage from "../../public/img/bg-6.avif";
 
 export default function EditBookPage() {
     return (
@@ -6,7 +7,7 @@ export default function EditBookPage() {
             <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
                 <img
                     className="h-full w-full object-cover"
-                    src="../../public/img/bg-6.avif"
+                    src={bgImage}
                     alt=""
                 />
             </div>

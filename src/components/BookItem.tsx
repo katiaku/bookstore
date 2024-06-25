@@ -6,6 +6,7 @@ import { BookItemProps } from "../config/types";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import noCoverAvailable from "../../public/img/no_cover_available.png";
 
 export default function BookItem(props: BookItemProps) {
 
@@ -76,7 +77,7 @@ export default function BookItem(props: BookItemProps) {
         <div className='font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200'>
             <div className='cursor-pointer absolute shadow-md left-[15px] -top-[15px] max-h-[280px] overflow-hidden'>
                 <img
-                    src={ book.photo || '../../public/img/no_cover_available.png' }
+                    src={ book.photo || noCoverAvailable }
                     alt={`The cover of ${ book.title } by ${ book.author }` }
                     width="170"
                     onClick={openModal}

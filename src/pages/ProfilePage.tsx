@@ -2,6 +2,8 @@ import { RiEdit2Fill } from "react-icons/ri";
 import useUserContext from "../hooks/useUserContext";
 import Quote from "../components/Quote";
 import { useNavigate } from "react-router-dom";
+import bgImage from "../../public/img/bg-7.avif";
+import blankProfilePicture from "../../public/img/blank_profile_picture.webp";
 
 export default function ProfilePage() {
 
@@ -29,7 +31,7 @@ export default function ProfilePage() {
 
                     <div className="w-[150px] h-[150px] bg-transparent rounded-full overflow-hidden">
                         <img
-                            src={user?.photo || '../../public/img/blank_profile_picture.webp'}
+                            src={user?.photo || blankProfilePicture}
                             alt={`Photo of ${user?.firstName} ${user?.lastName}`}
                             className="w-full h-full object-cover"
                         />
@@ -43,7 +45,7 @@ export default function ProfilePage() {
             <div className="absolute top-0 right-0 w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
                 <img
                     className="h-full w-full object-cover"
-                    src="../../public/img/bg-7.avif"
+                    src={bgImage}
                     alt=""
                 />
             </div>
