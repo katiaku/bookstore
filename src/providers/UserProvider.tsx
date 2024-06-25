@@ -26,12 +26,16 @@ function UserProvider(props: UserProviderProps) {
     function login(user: User) {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
+        // window.location.reload();
+        navigate(0);
     }
 
     function logout() {
         setUser(null);
         localStorage.removeItem('user');
-        navigate('/');
+        window.location.reload();
+        // navigate('/');
+        navigate(0);
     }
     
     return (
