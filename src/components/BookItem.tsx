@@ -20,7 +20,7 @@ export default function BookItem(props: BookItemProps) {
 
     async function deleteBook () {
         try {
-            const resp = await fetch(`http://localhost:3000/books?id_book=${book.id_book}`, { method: 'DELETE' });
+            const resp = await fetch(`https://api-bookshelve.vercel.app/books?id_book=${book.id_book}`, { method: 'DELETE' });
             const json = await resp.json();
             
             if (json) {
@@ -54,7 +54,7 @@ export default function BookItem(props: BookItemProps) {
 
     async function handleRating(starValue: number) {
         try {
-            const resp = await fetch(`http://localhost:3000/books`, {
+            const resp = await fetch(`https://api-bookshelve.vercel.app/books`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'

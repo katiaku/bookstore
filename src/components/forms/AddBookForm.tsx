@@ -33,7 +33,7 @@ export default function AddBookForm() {
         const addBookData: AddBookDataType = { ...data, id_user: user?.id_user };
 
         try {
-            const resp = await fetch('http://localhost:3000/books', {
+            const resp = await fetch('https://api-bookshelve.vercel.app/books', {
                 method: 'POST',
                 body: JSON.stringify(addBookData),
                 headers: {
