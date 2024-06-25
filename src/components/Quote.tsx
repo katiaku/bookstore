@@ -44,13 +44,14 @@ export default function Quote() {
     }, []);
 
     return (
-        <div className="cursor-default bg-transparent max-width-[100px] text-base font-nunito text-slate-100 mx-4 px-4 py-6 border-y-[1px]">
+        <div className="cursor-default bg-transparent max-width-[100px] text-base font-nunito text-slate-100 mx-4 px-4 py-6">
             {quotes.map(quote => 
                 <div
                     key={quote._id}
                     className="flex flex-col justify-start align-center gap-4 max-width-[100px]"
                 >
-                    <div className="flex gap-2">
+                    <div className="relative flex gap-2">
+                        <span className="absolute -left-10 top-0 text-orange-400 text-[6rem] leading-none -mt-4 select-none">“</span>
                         <p>{quote.content}</p>
                         <button onClick={() => handleCopy(quote.content)}>
                             <a>

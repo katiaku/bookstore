@@ -14,8 +14,6 @@ export default function Header() {
     const [isOpenSidebar, setIsOpenSidebar] = useState(false);
     const { user, logout } = useUserContext();
 
-    // TODO: header is not updated when user changes
-
     return (
         
         <div className="relative z-20 flex items-center px-4 lg:px-10 h-[60px] bg-white">
