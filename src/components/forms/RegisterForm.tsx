@@ -27,13 +27,13 @@ export default function RegisterForm() {
 
     function goToLogin() {
         setTimeout(() => {
-            navigate('/login');
+            navigate('https://api-bookshelve.vercel.app/login');
         }, 600);
     }
 
     async function onSubmit(data: FormValues) {
         try {
-            const resp = await fetch('http://localhost:3000/register', {
+            const resp = await fetch('https://api-bookshelve.vercel.app/register', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

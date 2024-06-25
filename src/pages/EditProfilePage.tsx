@@ -1,4 +1,5 @@
 import EditProfileForm from "../components/forms/EditProfileForm";
+import bgImage from "../../public/img/bg-7.avif";
 
 export default function EditProfilePage() {
     return (
@@ -6,7 +7,7 @@ export default function EditProfilePage() {
             <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">
                 <img
                     className="h-full w-full object-cover"
-                    src="../../public/img/bg-7.avif"
+                    src={bgImage}
                     alt=""
                 />
             </div>

@@ -25,7 +25,7 @@ export default function LoginForm() {
 
     async function onSubmit(data: FormValues) {
         try {
-            const resp = await fetch('http://localhost:3000/login', {
+            const resp = await fetch('https://api-bookshelve.vercel.app/login', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {

@@ -20,7 +20,7 @@ export default function EditProfileForm() {
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onChange",
-        defaultValues: user
+        defaultValues: user || { firstName: '', lastName: '', email: '', photo: '' }
     });
 
     const { errors, dirtyFields } = formState;
@@ -37,7 +37,7 @@ export default function EditProfileForm() {
         if (user) updatedUser.id_user = user.id_user;
         
         try {
-            const resp = await fetch('http://localhost:3000/users', {
+            const resp = await fetch('https://api-bookshelve.vercel.app/users', {
                 method: 'PUT',
                 body: JSON.stringify(updatedUser),
                 headers: {

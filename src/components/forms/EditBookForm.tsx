@@ -31,7 +31,7 @@ export default function EditBookForm() {
         const editBookData: EditBookDataType = { ...data, id_book: book.id_book};
 
         try {
-            const resp = await fetch('http://localhost:3000/books', {
+            const resp = await fetch('https://api-bookshelve.vercel.app/books', {
                 method: 'PUT',
                 body: JSON.stringify(editBookData),
                 headers: {

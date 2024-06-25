@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { AvatarProps } from "../config/types";
+import blankProfilePicture from "../../public/img/blank_profile_picture.webp";
 
 export default function Avatar({ user }: AvatarProps) {
 
@@ -17,7 +18,7 @@ export default function Avatar({ user }: AvatarProps) {
             <div className="border border-white size-10 rounded-full overflow-hidden">
                 <img
                     className="size-full object-cover"
-                    src={user.photo || '/img/avatar-placeholder.webp'}
+                    src={user.photo || blankProfilePicture}
                     alt={`Photo of ${user?.firstName} ${user?.lastName}`}
                 />
             </div>

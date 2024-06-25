@@ -16,7 +16,7 @@ export default function BooksPage() {
 
     async function getBooks () {
         try {
-            const resp = await fetch(`http://localhost:3000/books?id_user=${user?.id_user}`);
+            const resp = await fetch(`https://api-bookshelve.vercel.app/books?id_user=${user?.id_user}`);
         
             const json = await resp.json(); 
             console.log(json)
@@ -40,7 +40,7 @@ export default function BooksPage() {
 
     async function findByRating (rating: number) {
         try {
-            const resp = await fetch(`http://localhost:3000/rating`, {
+            const resp = await fetch(`https://api-bookshelve.vercel.app/rating`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -70,7 +70,7 @@ export default function BooksPage() {
             return;
         }
         try {
-            const resp = await fetch(`http://localhost:3000/search?id_user=${user?.id_user}&query=${query}`);
+            const resp = await fetch(`https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${query}`);
             const json = await resp.json();
             const titlesAndAuthors = json.map((book: Book) => `${book.title} by ${book.author}`);
             setSuggestions(titlesAndAuthors);
@@ -87,8 +87,8 @@ export default function BooksPage() {
 
     async function selectSuggestion(suggestion: string) {
         try {
-            const [title, author] = suggestion.split(' by ');
-            const resp = await fetch(`http://localhost:3000/search?id_user=${user?.id_user}&query=${title}`);
+            const [title] = suggestion.split(' by ');
+            const resp = await fetch(`https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${title}`);
             const json = await resp.json();
             setBooks(json);
             setSuggestions([]);
