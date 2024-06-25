@@ -1,6 +1,7 @@
 import { BiLogInCircle } from "react-icons/bi"; 
 import { BiPencil } from "react-icons/bi";  
 import { useNavigate } from "react-router-dom";
+import bgImage from "../../public/img/bg-4.avif";
 
 export default function HomePage() {
 
@@ -30,7 +31,7 @@ export default function HomePage() {
                 </div>
                 
                 <div className="hidden lg:block h-full w-1/2 overflow-hidden">
-                    <img src="../../public/img/bg-4.avif" alt="Pile of different books." className="h-full w-full object-cover hover:scale-110 transition-all duration-1000" />
+                    <img src={bgImage} alt="Pile of different books." className="h-full w-full object-cover hover:scale-110 transition-all duration-1000" />
                 </div>
             </div>
         </div>
