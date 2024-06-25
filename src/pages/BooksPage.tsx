@@ -87,7 +87,7 @@ export default function BooksPage() {
 
     async function selectSuggestion(suggestion: string) {
         try {
-            const [title, author] = suggestion.split(' by ');
+            const [title] = suggestion.split(' by ');
             const resp = await fetch(`http://localhost:3000/search?id_user=${user?.id_user}&query=${title}`);
             const json = await resp.json();
             setBooks(json);

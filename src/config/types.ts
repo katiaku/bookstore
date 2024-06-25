@@ -30,7 +30,7 @@ type User = {
     lastName: string;
     email: string;
     photo: string;
-    password: string;
+    password?: string;
 };
 
 type AvatarProps = {
