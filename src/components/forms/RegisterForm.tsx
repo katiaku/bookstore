@@ -27,7 +27,7 @@ export default function RegisterForm() {
 
     function goToLogin() {
         setTimeout(() => {
-            navigate('https://api-bookshelve.vercel.app/login');
+            navigate('/login');
         }, 600);
     }
 
