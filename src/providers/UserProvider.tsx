@@ -26,8 +26,8 @@ function UserProvider(props: UserProviderProps) {
     function login(user: User) {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
-        navigate('/profile');
         window.location.reload();
+        navigate('/profile');
     }
 
     function logout() {
