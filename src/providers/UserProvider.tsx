@@ -33,9 +33,8 @@ function UserProvider(props: UserProviderProps) {
     function logout() {
         setUser(null);
         localStorage.removeItem('user');
+        navigate('/');
         window.location.reload();
-        // navigate('/');
-        navigate(0);
     }
     
     return (
