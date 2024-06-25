@@ -8,7 +8,7 @@ export default function Menu({ setIsOpenSidebar }: SidebarProps) {
 
     const handleLinkClick = () => {
         if (setIsOpenSidebar) {
-            setIsOpenSidebar();
+            setIsOpenSidebar(false);
         }
     };
 

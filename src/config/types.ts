@@ -20,8 +20,9 @@ type BookListProps = {
 };
 
 type SidebarProps = {
-    isOpenSidebar: boolean;
-    setIsOpenSidebar: () => void;
+    isOpenSidebar?: boolean;
+    // setIsOpenSidebar?: () => void;
+    setIsOpenSidebar?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type User = {

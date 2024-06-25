@@ -20,7 +20,7 @@ export default function EditProfileForm() {
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: "onChange",
-        defaultValues: user
+        defaultValues: user || { firstName: '', lastName: '', email: '', photo: '' }
     });
 
     const { errors, dirtyFields } = formState;
