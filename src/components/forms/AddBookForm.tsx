@@ -48,7 +48,7 @@ export default function AddBookForm() {
                     position: "bottom-right",
                     theme: "colored"
                 });
-                navigate('/books');
+                navigate('https://bookshelve-two.vercel.app/books');
             }
         
             } catch (error) {
