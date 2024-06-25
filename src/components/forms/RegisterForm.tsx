@@ -17,7 +17,6 @@ export default function RegisterForm() {
 
     const navigate = useNavigate();
 
-    // TODO: check the commented out lines
     // const { login } = useUserContext();
 
     const { register, handleSubmit, formState, watch, reset } = useForm<FormValues>({
