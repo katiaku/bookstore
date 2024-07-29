@@ -1,5 +1,5 @@
-import EditBookForm from "../components/forms/EditBookForm";
-import bgImage from "../../public/img/bg-6.avif";
+import EditBookForm from '../components/forms/EditBookForm'
+import bgImage from '../../public/img/bg-6.avif'
 
 export default function EditBookPage() {
     return (
@@ -16,7 +16,8 @@ export default function EditBookPage() {
                 <div className="lg:w-1/2 lg:h-full"></div>
                 <div className="w-full lg:w-1/2 flex flex-col justify-center items-center lg:bg-blue-950 lg:h-full">
                     <h1 className="text-white font-poppins text-center text-2xl mb-4">
-                        Let's edit a <span className="text-orange-400">book</span>
+                        Let's edit a{' '}
+                        <span className="text-orange-400">book</span>
                         <br />
                         in your collection.
                     </h1>

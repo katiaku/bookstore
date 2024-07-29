@@ -1,8 +1,7 @@
-import AddBookForm from "../components/forms/AddBookForm";
-import bgImage from "../../public/img/bg-6.avif";
+import AddBookForm from '../components/forms/AddBookForm'
+import bgImage from '../../public/img/bg-6.avif'
 
 export default function AddBookPage() {
-
     return (
         <div className="relative bg-blue-950 page-height overflow-y-scroll">
             <div className="w-full lg:w-1/2 h-full overflow-hidden opacity-25 lg:opacity-100">

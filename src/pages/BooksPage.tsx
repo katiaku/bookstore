@@ -1,105 +1,113 @@
-import { BiSearch } from "react-icons/bi"; 
-import { useEffect, useState } from "react";
-import { Book } from "../config/types";
-import BookList from "../components/BookList";
-import useUserContext from "../hooks/useUserContext";
-import { toast } from "react-toastify";
-import { AiFillStar } from "react-icons/ai";
+import { BiSearch } from 'react-icons/bi'
+import { useEffect, useState } from 'react'
+import { Book } from '../config/types'
+import BookList from '../components/BookList'
+import useUserContext from '../hooks/useUserContext'
+import { toast } from 'react-toastify'
+import { AiFillStar } from 'react-icons/ai'
 
 export default function BooksPage() {
+    const [books, setBooks] = useState<Book[]>([])
+    const { user } = useUserContext()
 
-    const [books, setBooks] = useState<Book[]>([]);
-    const { user } = useUserContext();
+    const [searchQuery, setSearchQuery] = useState('')
+    const [suggestions, setSuggestions] = useState<string[]>([])
 
-    const [searchQuery, setSearchQuery] = useState("");
-    const [suggestions, setSuggestions] = useState<string[]>([]);
-
-    async function getBooks () {
+    async function getBooks() {
         try {
-            const resp = await fetch(`https://api-bookshelve.vercel.app/books?id_user=${user?.id_user}`);
-        
-            const json = await resp.json(); 
+            const resp = await fetch(
+                `https://api-bookshelve.vercel.app/books?id_user=${user?.id_user}`
+            )
+
+            const json = await resp.json()
             console.log(json)
-        
-            setBooks(json);
-        
+
+            setBooks(json)
         } catch (error) {
             if (error instanceof Error) {
-                toast.error("There was an error...", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                console.log(error.message);
+                toast.error('There was an error...', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                console.log(error.message)
             }
         }
     }
 
     useEffect(() => {
-        getBooks();
-    }, []);
+        getBooks()
+    }, [])
 
-    async function findByRating (rating: number) {
+    async function findByRating(rating: number) {
         try {
-            const resp = await fetch(`https://api-bookshelve.vercel.app/rating`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id_user: user?.id_user, rating })
-            });
-        
-            const json = await resp.json(); 
-            console.log(json);
-        
-            setBooks(json);
-        
+            const resp = await fetch(
+                `https://api-bookshelve.vercel.app/rating`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ id_user: user?.id_user, rating }),
+                }
+            )
+
+            const json = await resp.json()
+            console.log(json)
+
+            setBooks(json)
         } catch (error) {
             if (error instanceof Error) {
-                toast.error("There was an error...", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                console.log(error.message);
+                toast.error('There was an error...', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                console.log(error.message)
             }
         }
     }
 
     async function searchBooks(query: string) {
         if (!query) {
-            setSuggestions([]);
-            return;
+            setSuggestions([])
+            return
         }
         try {
-            const resp = await fetch(`https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${query}`);
-            const json = await resp.json();
-            const titlesAndAuthors = json.map((book: Book) => `${book.title} by ${book.author}`);
-            setSuggestions(titlesAndAuthors);
+            const resp = await fetch(
+                `https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${query}`
+            )
+            const json = await resp.json()
+            const titlesAndAuthors = json.map(
+                (book: Book) => `${book.title} by ${book.author}`
+            )
+            setSuggestions(titlesAndAuthors)
         } catch (error) {
             if (error instanceof Error) {
-                toast.error("There was an error...", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                console.log(error.message);
+                toast.error('There was an error...', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                console.log(error.message)
             }
         }
     }
 
     async function selectSuggestion(suggestion: string) {
         try {
-            const [title] = suggestion.split(' by ');
-            const resp = await fetch(`https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${title}`);
-            const json = await resp.json();
-            setBooks(json);
-            setSuggestions([]);
-            setSearchQuery("");
+            const [title] = suggestion.split(' by ')
+            const resp = await fetch(
+                `https://api-bookshelve.vercel.app/search?id_user=${user?.id_user}&query=${title}`
+            )
+            const json = await resp.json()
+            setBooks(json)
+            setSuggestions([])
+            setSearchQuery('')
         } catch (error) {
             if (error instanceof Error) {
-                toast.error("There was an error...", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                console.log(error.message);
+                toast.error('There was an error...', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                console.log(error.message)
             }
         }
     }
@@ -107,9 +115,13 @@ export default function BooksPage() {
     return (
         <div className="bg-blue-950 page-height overflow-y-scroll w-full flex flex-col items-center">
             <div className="text-slate-200 mt-8 px-8 md:self-start cursor-default">
-                { books.length === 1 ? <p>Results: found {books.length} book.</p> : <p>Results: found {books.length} books.</p> }
+                {books.length === 1 ? (
+                    <p>Results: found {books.length} book.</p>
+                ) : (
+                    <p>Results: found {books.length} books.</p>
+                )}
             </div>
-            
+
             <div className="md:w-full md:px-8 flex flex-col md:flex-row justify-center md:justify-between gap-4 text-xs mt-6">
                 <div className="relative w-full md:w-[300px]">
                     <div className="flex justify-between items-center gap-4 text-slate-200 w-full rounded-md bg-transparent border-[1px] py-2 px-4 focus:outline-none border-slate-200">
@@ -117,8 +129,8 @@ export default function BooksPage() {
                             type="text"
                             value={searchQuery}
                             onChange={(e) => {
-                                setSearchQuery(e.target.value);
-                                searchBooks(e.target.value);
+                                setSearchQuery(e.target.value)
+                                searchBooks(e.target.value)
                             }}
                             placeholder="Search by title or author"
                             className="w-full h-full bg-transparent focus:outline-none text-sm"
@@ -143,16 +155,14 @@ export default function BooksPage() {
                 <div className="flex gap-3 items-center">
                     <div className="flex items-center gap-3 text-orange-400">
                         {[5, 4, 3, 2, 1].map((rating) => (
-
-                                <button
-                                    className="flex gap-1 items-center text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-[.4rem] transition-all ease-in-out duration-300"
-                                    key={rating}
-                                    onClick={() => findByRating(rating)}
-                                >
-                                    <p>{rating}</p>
-                                    <AiFillStar/>
-                                </button>
-
+                            <button
+                                className="flex gap-1 items-center text-slate-300 hover:text-orange-300 border-[1px] border-slate-300 hover:border-orange-300 rounded-lg px-[.4rem] transition-all ease-in-out duration-300"
+                                key={rating}
+                                onClick={() => findByRating(rating)}
+                            >
+                                <p>{rating}</p>
+                                <AiFillStar />
+                            </button>
                         ))}
                     </div>
                     <button

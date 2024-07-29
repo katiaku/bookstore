@@ -1,28 +1,25 @@
-import { FaRegSadTear } from "react-icons/fa"; 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { FaRegSadTear } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function Error404() {
-
-    const [timer, setTimer] = useState(5);
-    const navigate = useNavigate();
+    const [timer, setTimer] = useState(5)
+    const navigate = useNavigate()
 
     useEffect(() => {
-
         const idTimeout = setTimeout(() => {
-            navigate('/');
-        }, 5000);
+            navigate('/')
+        }, 5000)
 
         const idInterval = setInterval(() => {
             setTimer((prevTimer) => prevTimer - 1)
-        }, 1000);
+        }, 1000)
 
         return () => {
-            clearTimeout(idTimeout);
-            clearInterval(idInterval);
+            clearTimeout(idTimeout)
+            clearInterval(idInterval)
         }
-
-    }, [navigate]);
+    }, [navigate])
 
     return (
         <div className="w-screen page-height flex flex-col justify-center items-center bg-blue-950 text-white">
@@ -36,7 +33,7 @@ export default function Error404() {
                 Page Not Found
             </h2>
             <p className="mt-10 text-lg">
-                Redirecting to Home in { timer } seconds...
+                Redirecting to Home in {timer} seconds...
             </p>
         </div>
     )
