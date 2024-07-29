@@ -1,85 +1,90 @@
-import { BiCheckCircle } from "react-icons/bi"; 
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import useUserContext from "../../hooks/useUserContext";
-import { User } from "../../config/types";
-import { useNavigate } from "react-router-dom";
+import { BiCheckCircle } from 'react-icons/bi'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import useUserContext from '../../hooks/useUserContext'
+import { User } from '../../config/types'
+import { useNavigate } from 'react-router-dom'
 
 type FormValues = {
-    firstName: string,
-    lastName: string,
-    email: string,
-    photo: string,
+    firstName: string
+    lastName: string
+    email: string
+    photo: string
 }
 
 export default function EditProfileForm() {
+    const navigate = useNavigate()
 
-    const navigate = useNavigate();
-
-    const { user, login } = useUserContext();
+    const { user, login } = useUserContext()
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
-        mode: "onChange",
-        defaultValues: user || { firstName: '', lastName: '', email: '', photo: '' }
-    });
+        mode: 'onChange',
+        defaultValues: user || {
+            firstName: '',
+            lastName: '',
+            email: '',
+            photo: '',
+        },
+    })
 
-    const { errors, dirtyFields } = formState;
+    const { errors, dirtyFields } = formState
 
     function goToProfile() {
         setTimeout(() => {
-            navigate('/profile');
-        }, 600);
+            navigate('/profile')
+        }, 600)
     }
 
     async function onSubmit(data: FormValues) {
-        const updatedUser: User = { ...data };
+        const updatedUser: User = { ...data }
 
-        if (user) updatedUser.id_user = user.id_user;
-        
+        if (user) updatedUser.id_user = user.id_user
+
         try {
-            const resp = await fetch('https://api-bookshelve.vercel.app/users', {
-                method: 'PUT',
-                body: JSON.stringify(updatedUser),
-                headers: {
-                    'Content-Type': 'application/json'
+            const resp = await fetch(
+                'https://api-bookshelve.vercel.app/users',
+                {
+                    method: 'PUT',
+                    body: JSON.stringify(updatedUser),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 }
-            });
-        
-            const json = await resp.json();
-        
+            )
+
+            const json = await resp.json()
+
             if (json) {
-                toast.success("User profile updated successfully", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                login(updatedUser);
+                toast.success('User profile updated successfully', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                login(updatedUser)
             }
-            } catch (error) {
+        } catch (error) {
             if (error instanceof Error) {
-                toast.error("There was an error...", {
-                    position: "bottom-right",
-                    theme: "colored"
-                });
-                console.log(error);
+                toast.error('There was an error...', {
+                    position: 'bottom-right',
+                    theme: 'colored',
+                })
+                console.log(error)
             }
         }
-        reset();
+        reset()
     }
-    
+
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
             className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
         >
             <div className="flex flex-col">
-                <label
-                    htmlFor="firstName"
-                    className="text-sm"
-                >
+                <label htmlFor="firstName" className="text-sm">
                     First Name:
                 </label>
 
-                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.firstName ? " border-red-400" : "border-slate-200"}`}
+                <div
+                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.firstName ? ' border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
@@ -87,31 +92,34 @@ export default function EditProfileForm() {
                         placeholder="John"
                         className="w-full py-2 px-2 focus:outline-none bg-transparent"
                         {...register('firstName', {
-                            required: { value: true, message: 'First name is required'}
+                            required: {
+                                value: true,
+                                message: 'First name is required',
+                            },
                         })}
                     />
-                    { dirtyFields.firstName && !errors.firstName && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                    {dirtyFields.firstName && !errors.firstName && (
+                        <span className="text-lime-500 pr-2">
+                            <BiCheckCircle />
+                        </span>
+                    )}
                 </div>
-                { 
-                    errors.firstName 
-                    ? 
+                {errors.firstName ? (
                     <div className="h-4 text-red-400 text-xs text-right pt-1">
-                        { errors.firstName.message }
-                    </div> 
-                    : 
-                    <div className="h-4"></div> 
-                }
+                        {errors.firstName.message}
+                    </div>
+                ) : (
+                    <div className="h-4"></div>
+                )}
             </div>
 
             <div className="flex flex-col">
-                <label
-                    htmlFor="lastName"
-                    className="text-sm"
-                >
+                <label htmlFor="lastName" className="text-sm">
                     Last Name:
                 </label>
 
-                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.lastName ? " border-red-400" : "border-slate-200"}`}
+                <div
+                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.lastName ? ' border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
@@ -119,31 +127,34 @@ export default function EditProfileForm() {
                         placeholder="Doe"
                         className="w-full py-2 px-2 focus:outline-none bg-transparent"
                         {...register('lastName', {
-                            required: { value: true, message: 'Last name is required'}
+                            required: {
+                                value: true,
+                                message: 'Last name is required',
+                            },
                         })}
                     />
-                    { dirtyFields.lastName && !errors.lastName && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                    {dirtyFields.lastName && !errors.lastName && (
+                        <span className="text-lime-500 pr-2">
+                            <BiCheckCircle />
+                        </span>
+                    )}
                 </div>
-                { 
-                    errors.lastName 
-                    ? 
+                {errors.lastName ? (
                     <div className="h-4 text-red-400 text-xs text-right pt-1">
-                        { errors.lastName.message }
-                    </div> 
-                    : 
-                    <div className="h-4"></div> 
-                }
+                        {errors.lastName.message}
+                    </div>
+                ) : (
+                    <div className="h-4"></div>
+                )}
             </div>
 
             <div className="flex flex-col">
-                <label
-                    htmlFor="email"
-                    className="text-sm"
-                >
+                <label htmlFor="email" className="text-sm">
                     Email:
                 </label>
 
-                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.email ? " border-red-400" : "border-slate-200"}`}
+                <div
+                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.email ? ' border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="email"
@@ -151,31 +162,34 @@ export default function EditProfileForm() {
                         placeholder="email@email.com"
                         className="w-full py-2 px-2 focus:outline-none bg-transparent"
                         {...register('email', {
-                            required: { value: true, message: 'Email is required'}
+                            required: {
+                                value: true,
+                                message: 'Email is required',
+                            },
                         })}
                     />
-                    { dirtyFields.email && !errors.email && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                    {dirtyFields.email && !errors.email && (
+                        <span className="text-lime-500 pr-2">
+                            <BiCheckCircle />
+                        </span>
+                    )}
                 </div>
-                { 
-                    errors.email 
-                    ? 
+                {errors.email ? (
                     <div className="h-4 text-red-400 text-xs text-right pt-1">
-                        { errors.email.message }
-                    </div> 
-                    : 
-                    <div className="h-4"></div> 
-                }
+                        {errors.email.message}
+                    </div>
+                ) : (
+                    <div className="h-4"></div>
+                )}
             </div>
 
             <div className="flex flex-col">
-                <label
-                    htmlFor="photo"
-                    className="text-sm"
-                >
+                <label htmlFor="photo" className="text-sm">
                     Photo URL:
                 </label>
 
-                <div className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? " border-red-400" : "border-slate-200"}`}
+                <div
+                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? ' border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
@@ -183,20 +197,25 @@ export default function EditProfileForm() {
                         placeholder="https://photo.jpg"
                         className="w-full py-2 px-2 focus:outline-none bg-transparent"
                         {...register('photo', {
-                            required: { value: true, message: 'Photo URL is required'}
+                            required: {
+                                value: true,
+                                message: 'Photo URL is required',
+                            },
                         })}
                     />
-                    { dirtyFields.photo && !errors.photo && <span className="text-lime-500 pr-2"><BiCheckCircle /></span> }
+                    {dirtyFields.photo && !errors.photo && (
+                        <span className="text-lime-500 pr-2">
+                            <BiCheckCircle />
+                        </span>
+                    )}
                 </div>
-                { 
-                    errors.photo 
-                    ? 
+                {errors.photo ? (
                     <div className="h-4 text-red-400 text-xs text-right pt-1">
-                        { errors.photo.message }
-                    </div> 
-                    : 
-                    <div className="h-4"></div> 
-                }
+                        {errors.photo.message}
+                    </div>
+                ) : (
+                    <div className="h-4"></div>
+                )}
             </div>
 
             <button

@@ -11,46 +11,46 @@ import AddBookPage from './pages/AddBookPage'
 import EditBookPage from './pages/EditBookPage'
 import PublicRoutes from './components/routes/PublicRoutes'
 import PrivateRoutes from './components/routes/PrivateRoutes'
-import { Flip, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { Flip, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Error404 from './pages/Error404'
 import UserProvider from './providers/UserProvider'
 import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
+    return (
+        <>
+            <Header />
 
-  return (
-    <>
-      <Header />
+            <UserProvider>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
 
-      <UserProvider>
+                    <Route element={<PublicRoutes />}>
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/register" element={<RegisterPage />} />
+                    </Route>
 
-        <Routes>
-          <Route path='/' element={<HomePage />} />
+                    <Route element={<PrivateRoutes />}>
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route
+                            path="/edit-profile"
+                            element={<EditProfilePage />}
+                        />
+                        <Route path="/books" element={<BooksPage />} />
+                        <Route path="/add-book" element={<AddBookPage />} />
+                        <Route path="/edit-book" element={<EditBookPage />} />
+                    </Route>
 
-          <Route element={<PublicRoutes />}>
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='/register' element={<RegisterPage />} />
-          </Route>
+                    <Route path="*" element={<Error404 />} />
+                </Routes>
+            </UserProvider>
 
-          <Route element={<PrivateRoutes />}>
-            <Route path='/profile' element={<ProfilePage />} />
-            <Route path='/edit-profile' element={<EditProfilePage />} />
-            <Route path='/books' element={<BooksPage />} />
-            <Route path='/add-book' element={<AddBookPage />} />
-            <Route path='/edit-book' element={<EditBookPage />} />
-          </Route>
+            <Footer />
 
-          <Route path="*" element={<Error404 />} />
-        </Routes>
-
-      </UserProvider>
-
-      <Footer />
-
-      <ToastContainer transition={Flip} />
-    </>
-  )
+            <ToastContainer transition={Flip} />
+        </>
+    )
 }
 
 export default App
