@@ -1,0 +1,16 @@
+# Node modules and build artifacts
+node_modules/
+dist/
+build/
+
+# Vite's cache and build outputs
+.vite/
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Git directories
+.git/
+.gitignore

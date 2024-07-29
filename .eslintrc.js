@@ -8,7 +8,7 @@ export default {
         'prettier',
         'plugin:prettier/recommended',
     ],
-    ignorePatterns: ['dist', '.eslintrc.cjs'],
+    ignorePatterns: ['dist', '.eslintrc.js'],
     parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 2020,
