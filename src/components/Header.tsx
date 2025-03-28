@@ -1,35 +1,35 @@
-import { RxHamburgerMenu } from 'react-icons/rx'
-import { AiOutlineClose } from 'react-icons/ai'
-import Logo from './Logo'
-import Menu from './Menu'
-import { useState } from 'react'
-import Sidebar from './Sidebar'
-import { AnimatePresence, motion } from 'framer-motion'
-import useUserContext from '../hooks/useUserContext'
-import { IoMdLogOut } from 'react-icons/io'
-import Avatar from './Avatar'
+import { RxHamburgerMenu } from 'react-icons/rx';
+import { AiOutlineClose } from 'react-icons/ai';
+import Logo from './Logo';
+import Menu from './Menu';
+import { useState } from 'react';
+import Sidebar from './Sidebar';
+import { AnimatePresence, motion } from 'framer-motion';
+import useUserContext from '../hooks/useUserContext';
+import { IoMdLogOut } from 'react-icons/io';
+import Avatar from './Avatar';
 
 export default function Header() {
-    const [isOpenSidebar, setIsOpenSidebar] = useState(false)
-    const { user, logout } = useUserContext()
+    const [isOpenSidebar, setIsOpenSidebar] = useState(false);
+    const { user, logout } = useUserContext();
 
     return (
-        <div className="relative z-20 flex items-center px-4 lg:px-10 h-[60px] bg-white">
+        <div className="relative z-20 flex h-[60px] items-center bg-white px-4 lg:px-10">
             <Logo />
 
-            <p className="font-nunito text-2xl md:text-md lg:text-2xl font-bold pl-2 text-blue-950 mr-4">
+            <p className="md:text-md mr-4 pl-2 font-nunito text-2xl font-bold text-blue-950 lg:text-2xl">
                 <span className="text-orange-400">B</span>ook
                 <span className="text-orange-400">S</span>helve
             </p>
 
-            <div className="hidden md:block h-full w-full">
+            <div className="hidden h-full w-full md:block">
                 <Menu />
             </div>
 
             {user && <Avatar user={user} />}
 
             <button
-                className="md:hidden font-bold text-2xl text-blue-950 mr-2"
+                className="mr-2 text-2xl font-bold text-blue-950 md:hidden"
                 style={{ marginLeft: user ? '0' : 'auto' }}
                 onClick={() => setIsOpenSidebar(!isOpenSidebar)}
             >
@@ -39,7 +39,7 @@ export default function Header() {
             {user && (
                 <button
                     onClick={logout}
-                    className="font-semibold text-2xl md:text-xl text-blue-950 pl-2 flex items-center justify-center transition-all ease-in-out duration-300 hover:text-orange-400"
+                    className="flex items-center justify-center pl-2 text-2xl font-semibold text-blue-950 transition-all duration-300 ease-in-out hover:text-orange-400 md:text-xl"
                 >
                     <IoMdLogOut />
                 </button>
@@ -61,5 +61,5 @@ export default function Header() {
                 )}
             </AnimatePresence>
         </div>
-    )
+    );
 }

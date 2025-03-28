@@ -1,56 +1,56 @@
-import { CgCloseO } from 'react-icons/cg'
-import { BsWikipedia } from 'react-icons/bs'
-import { AiFillStar } from 'react-icons/ai'
-import { RiDeleteBin5Fill, RiEdit2Fill } from 'react-icons/ri'
-import { BookItemProps } from '../config/types'
-import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
-import noCoverAvailable from '../../public/img/no_cover_available.png'
+import { CgCloseO } from 'react-icons/cg';
+import { BsWikipedia } from 'react-icons/bs';
+import { AiFillStar } from 'react-icons/ai';
+import { RiDeleteBin5Fill, RiEdit2Fill } from 'react-icons/ri';
+import { BookItemProps } from '../config/types';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import noCoverAvailable from '../../public/img/no_cover_available.png';
 
 export default function BookItem(props: BookItemProps) {
-    const { book, getBooks } = props
+    const { book, getBooks } = props;
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    const [rating, setRating] = useState(book.rating || 0)
+    const [rating, setRating] = useState(book.rating || 0);
 
     async function deleteBook() {
         try {
             const resp = await fetch(
                 `https://api-bookshelve.vercel.app/books?id_book=${book.id_book}`,
                 { method: 'DELETE' }
-            )
-            const json = await resp.json()
+            );
+            const json = await resp.json();
 
             if (json) {
                 toast.success('Book deleted successfully', {
                     position: 'bottom-right',
                     theme: 'colored',
-                })
-                getBooks()
+                });
+                getBooks();
             }
         } catch (error) {
             toast.error('There was an error...', {
                 position: 'bottom-right',
                 theme: 'colored',
-            })
-            console.log(error)
+            });
+            console.log(error);
         }
     }
 
     function editBook() {
-        navigate('/edit-book', { state: book })
+        navigate('/edit-book', { state: book });
     }
 
     function openModal() {
-        setIsModalOpen(true)
+        setIsModalOpen(true);
     }
 
     function closeModal() {
-        setIsModalOpen(false)
+        setIsModalOpen(false);
     }
 
     async function handleRating(starValue: number) {
@@ -67,21 +67,21 @@ export default function BookItem(props: BookItemProps) {
                         rating: starValue,
                     }),
                 }
-            )
-            const json = await resp.json()
+            );
+            const json = await resp.json();
 
             if (json) {
-                setRating(starValue)
-                getBooks()
+                setRating(starValue);
+                getBooks();
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
     return (
-        <div className="font-poppins w-full max-w-[400px] md:w-[400px] h-[280px] relative shadow-md bg-slate-200">
-            <div className="cursor-pointer absolute shadow-md left-[15px] -top-[15px] max-h-[280px] overflow-hidden">
+        <div className="relative h-[280px] w-full max-w-[400px] bg-slate-200 font-poppins shadow-md md:w-[400px]">
+            <div className="absolute -top-[15px] left-[15px] max-h-[280px] cursor-pointer overflow-hidden shadow-md">
                 <img
                     src={book.photo || noCoverAvailable}
                     alt={`The cover of ${book.title} by ${book.author}`}
@@ -90,9 +90,9 @@ export default function BookItem(props: BookItemProps) {
                 />
             </div>
 
-            <div className="cursor-default bg-slate-200 absolute right-0 md:left-[200px] w-1/2 h-full py-[15px] px-[15px] pr-[15px] md:pl-0 flex flex-col justify-between items-start">
-                <div className="w-[170px] md:w-[185px] text-wrap overflow-hidden flex flex-col gap-2 pr-6 md:pr-0 md:pl-2">
-                    <p className="font-nunito font-bold text-xl text-slate-700">
+            <div className="absolute right-0 flex h-full w-1/2 cursor-default flex-col items-start justify-between bg-slate-200 px-[15px] py-[15px] pr-[15px] md:left-[200px] md:pl-0">
+                <div className="flex w-[170px] flex-col gap-2 overflow-hidden text-wrap pr-6 md:w-[185px] md:pl-2 md:pr-0">
+                    <p className="font-nunito text-xl font-bold text-slate-700">
                         {book.title}
                     </p>
                     <p className="text-xs italic text-slate-700">
@@ -100,7 +100,7 @@ export default function BookItem(props: BookItemProps) {
                     </p>
                     <p className="text-xs italic text-slate-500">{book.type}</p>
                     <p className="flex">
-                        {[1, 2, 3, 4, 5].map((starValue) => (
+                        {[1, 2, 3, 4, 5].map(starValue => (
                             <AiFillStar
                                 key={starValue}
                                 className={`cursor-pointer ${starValue <= rating ? 'text-orange-400' : 'text-slate-500'}`}
@@ -110,32 +110,32 @@ export default function BookItem(props: BookItemProps) {
                     </p>
                 </div>
 
-                <div className="absolute -left-[20%] md:-left-[30px] -bottom-[15px] w-[60px] h-[60px] rounded-full bg-orange-400 text-white text-sm flex justify-center items-center shadow-md">
+                <div className="absolute -bottom-[15px] -left-[20%] flex h-[60px] w-[60px] items-center justify-center rounded-full bg-orange-400 text-sm text-white shadow-md md:-left-[30px]">
                     <span>{book.price}€</span>
                 </div>
 
-                <div className="self-end flex gap-3 text-sm">
+                <div className="flex gap-3 self-end text-sm">
                     <a
                         href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(book.title)}`}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        <BsWikipedia className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                        <BsWikipedia className="cursor-pointer text-slate-700 transition-all duration-300 ease-in-out hover:text-orange-400" />
                     </a>
                     <button onClick={editBook}>
-                        <RiEdit2Fill className="cursor-pointer text-slate-700 hover:text-orange-400 transition-all ease-in-out duration-300" />
+                        <RiEdit2Fill className="cursor-pointer text-slate-700 transition-all duration-300 ease-in-out hover:text-orange-400" />
                     </button>
                     <button onClick={deleteBook}>
-                        <RiDeleteBin5Fill className="cursor-pointer text-slate-700 hover:text-red-700 transition-all ease-in-out duration-300" />
+                        <RiDeleteBin5Fill className="cursor-pointer text-slate-700 transition-all duration-300 ease-in-out hover:text-red-700" />
                     </button>
                 </div>
             </div>
 
             {isModalOpen && (
-                <div className="fixed inset-0 h-screen w-screen bg-blue-950 flex items-center justify-center z-50 p-10">
+                <div className="fixed inset-0 z-50 flex h-screen w-screen items-center justify-center bg-blue-950 p-10">
                     <div className="w-content h-content text-right">
                         <button
-                            className="mb-4 text-xl text-white hover:text-orange-400 transition-all ease-in-out duration-300"
+                            className="mb-4 text-xl text-white transition-all duration-300 ease-in-out hover:text-orange-400"
                             onClick={closeModal}
                         >
                             <CgCloseO />
@@ -153,5 +153,5 @@ export default function BookItem(props: BookItemProps) {
                 </div>
             )}
         </div>
-    )
+    );
 }
