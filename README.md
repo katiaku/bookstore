@@ -4,7 +4,14 @@
 
 Welcome to **BookShelve**, an intuitive app designed to manage your book collection. Built with a modern tech stack including React, TypeScript, Tailwind CSS, Framer Motion, MySQL, and Express, BookShelve offers an easy to use interactive platform for sharing and discovering books.
 
-LIVE VERSION: [BookShelve](https://bookshelve-two.vercel.app/)
+#### Live Version
+
+[BookShelve](https://bookshelve-two.vercel.app/)
+
+#### Mock Account
+
+email: bookworm@mail.io,
+password: bookworm
 
 ## Note
 
