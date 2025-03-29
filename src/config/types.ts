@@ -37,6 +37,12 @@ type AvatarProps = {
     user: User;
 };
 
+type QuoteType = {
+    // _id: string;
+    quote: string;
+    author: string;
+};
+
 export type {
     Book,
     BookItemProps,
@@ -44,4 +50,5 @@ export type {
     SidebarProps,
     User,
     AvatarProps,
+    QuoteType,
 };

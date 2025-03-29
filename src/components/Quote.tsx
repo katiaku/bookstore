@@ -1,15 +1,10 @@
 import { BiCopy } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-
-type Quote = {
-    // _id: string;
-    quote: string;
-    author: string;
-};
+import { QuoteType } from '../config/types';
 
 export default function Quote() {
-    const [quotes, setQuotes] = useState<Quote[]>([]);
+    const [quotes, setQuotes] = useState<QuoteType[]>([]);
 
     async function getQuote() {
         try {
