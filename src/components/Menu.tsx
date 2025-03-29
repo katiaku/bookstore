@@ -39,13 +39,6 @@ export default function Menu({ setIsOpenSidebar }: SidebarProps) {
                     Register
                 </NavLink>
             )}
-            {/* {user && <NavLink
-                to="/profile"
-                onClick={handleLinkClick}
-                className="border-4 border-x-0 border-transparent md:[&.active]:border-b-orange-400 w-full h-full md:px-8 lg:px-12 flex items-center justify-center text-blue-950 transition-all ease-in-out duration-300 hover:bg-blue-950 md:hover:bg-orange-400 hover:text-white"
-            >
-                Profile
-            </NavLink>} */}
             {user && (
                 <NavLink
                     to="/books"

@@ -1,7 +1,6 @@
 import { BiCheckCircle } from 'react-icons/bi';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-// import useUserContext from "../../hooks/useUserContext";
 import { useNavigate } from 'react-router-dom';
 
 type FormValues = {
@@ -15,8 +14,6 @@ type FormValues = {
 
 export default function RegisterForm() {
     const navigate = useNavigate();
-
-    // const { login } = useUserContext();
 
     const { register, handleSubmit, formState, watch, reset } =
         useForm<FormValues>({
@@ -51,7 +48,6 @@ export default function RegisterForm() {
                     position: 'bottom-right',
                     theme: 'colored',
                 });
-                // login(json)
             }
         } catch (error) {
             if (error instanceof Error) {
