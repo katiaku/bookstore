@@ -1,24 +1,22 @@
-import { BiCopy } from 'react-icons/bi'
-import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
-
-type Quote = {
-    _id: string
-    content: string
-    author: string
-}
+import { BiCopy } from 'react-icons/bi';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { QuoteType } from '../config/types';
 
 export default function Quote() {
-    const [quotes, setQuotes] = useState<Quote[]>([])
+    const [quotes, setQuotes] = useState<QuoteType[]>([]);
 
     async function getQuote() {
         try {
-            const resp = await fetch('https://api.quotable.io/quotes/random')
-            const json = await resp.json()
-            setQuotes(json)
+            // const resp = await fetch('http://api.quotable.io/quotes/random'); <--- deprecated since 2024 (https certificate issue)
+            const resp = await fetch(
+                'https://api.breakingbadquotes.xyz/v1/quotes'
+            );
+            const json = await resp.json();
+            setQuotes(json);
         } catch (error) {
             if (error instanceof Error) {
-                console.log(error.message)
+                console.log(error.message);
             }
         }
     }
@@ -30,49 +28,49 @@ export default function Quote() {
                 toast.success('Quote copied to clipboard', {
                     position: 'bottom-right',
                     theme: 'colored',
-                })
+                });
             })
-            .catch((error) => {
-                console.log(error.message)
+            .catch(error => {
+                console.log(error.message);
                 toast.success('Could not copy text', {
                     position: 'bottom-right',
                     theme: 'colored',
-                })
-            })
+                });
+            });
     }
 
     useEffect(() => {
-        getQuote()
-    }, [])
+        getQuote();
+    }, []);
 
     return (
-        <div className="cursor-default bg-transparent max-width-[100px] text-base font-nunito text-slate-100 mx-4 px-4 py-6">
-            {quotes.map((quote) => (
-                <div
-                    key={quote._id}
-                    className="flex flex-col justify-start align-center gap-4 max-width-[100px]"
-                >
-                    <div className="relative flex gap-2">
-                        <span className="absolute -left-10 top-0 text-orange-400 text-[6rem] leading-none -mt-4 select-none">
-                            “
-                        </span>
-                        <p>{quote.content}</p>
-                        <button onClick={() => handleCopy(quote.content)}>
-                            <a>
-                                <BiCopy className="cursor-pointer text-white text-base hover:text-orange-400 transition-all ease-in-out duration-300" />
-                            </a>
-                        </button>
-                    </div>
-                    <a
-                        href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(quote.author)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="self-end italic hover:underline"
-                    >
-                        - {quote.author}
-                    </a>
+        <div className="max-width-[100px] mx-4 cursor-default bg-transparent px-4 py-6 font-nunito text-base text-slate-100">
+            {/* {quotes.map(quote => ( */}
+            <div
+                // key={quote._id}
+                className="align-center max-width-[100px] flex flex-col justify-start gap-4"
+            >
+                <div className="relative flex gap-2">
+                    <span className="absolute -left-10 top-0 -mt-4 select-none text-[6rem] leading-none text-orange-400">
+                        “
+                    </span>
+                    <p>{quotes[0]?.quote}</p>
+                    <button onClick={() => handleCopy(quotes[0]?.quote)}>
+                        <a>
+                            <BiCopy className="cursor-pointer text-base text-white transition-all duration-300 ease-in-out hover:text-orange-400" />
+                        </a>
+                    </button>
                 </div>
-            ))}
+                <a
+                    href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(quotes[0]?.author)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="self-end italic hover:underline"
+                >
+                    - {quotes[0]?.author}
+                </a>
+            </div>
+            {/* ))} */}
         </div>
-    )
+    );
 }

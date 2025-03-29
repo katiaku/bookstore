@@ -1,21 +1,21 @@
-import { BiCheckCircle } from 'react-icons/bi'
-import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
-import useUserContext from '../../hooks/useUserContext'
-import { User } from '../../config/types'
-import { useNavigate } from 'react-router-dom'
+import { BiCheckCircle } from 'react-icons/bi';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import useUserContext from '../../hooks/useUserContext';
+import { User } from '../../config/types';
+import { useNavigate } from 'react-router-dom';
 
 type FormValues = {
-    firstName: string
-    lastName: string
-    email: string
-    photo: string
-}
+    firstName: string;
+    lastName: string;
+    email: string;
+    photo: string;
+};
 
 export default function EditProfileForm() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const { user, login } = useUserContext()
+    const { user, login } = useUserContext();
 
     const { register, handleSubmit, formState, reset } = useForm<FormValues>({
         mode: 'onChange',
@@ -25,20 +25,20 @@ export default function EditProfileForm() {
             email: '',
             photo: '',
         },
-    })
+    });
 
-    const { errors, dirtyFields } = formState
+    const { errors, dirtyFields } = formState;
 
     function goToProfile() {
         setTimeout(() => {
-            navigate('/profile')
-        }, 600)
+            navigate('/profile');
+        }, 600);
     }
 
     async function onSubmit(data: FormValues) {
-        const updatedUser: User = { ...data }
+        const updatedUser: User = { ...data };
 
-        if (user) updatedUser.id_user = user.id_user
+        if (user) updatedUser.id_user = user.id_user;
 
         try {
             const resp = await fetch(
@@ -50,33 +50,33 @@ export default function EditProfileForm() {
                         'Content-Type': 'application/json',
                     },
                 }
-            )
+            );
 
-            const json = await resp.json()
+            const json = await resp.json();
 
             if (json) {
                 toast.success('User profile updated successfully', {
                     position: 'bottom-right',
                     theme: 'colored',
-                })
-                login(updatedUser)
+                });
+                login(updatedUser);
             }
         } catch (error) {
             if (error instanceof Error) {
                 toast.error('There was an error...', {
                     position: 'bottom-right',
                     theme: 'colored',
-                })
-                console.log(error)
+                });
+                console.log(error);
             }
         }
-        reset()
+        reset();
     }
 
     return (
         <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mx-4 w-full md:w-[350px] font-poppins flex flex-col p-4 text-slate-200"
+            className="mx-4 flex w-full flex-col p-4 font-poppins text-slate-200 md:w-[350px]"
         >
             <div className="flex flex-col">
                 <label htmlFor="firstName" className="text-sm">
@@ -84,13 +84,13 @@ export default function EditProfileForm() {
                 </label>
 
                 <div
-                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.firstName ? ' border-red-400' : 'border-slate-200'}`}
+                    className={`flex items-center justify-between rounded-md border-[1px] bg-transparent px-0 py-0 text-sm ${errors.firstName ? 'border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
                         id="firstName"
                         placeholder="John"
-                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        className="w-full bg-transparent px-2 py-2 focus:outline-none"
                         {...register('firstName', {
                             required: {
                                 value: true,
@@ -99,13 +99,13 @@ export default function EditProfileForm() {
                         })}
                     />
                     {dirtyFields.firstName && !errors.firstName && (
-                        <span className="text-lime-500 pr-2">
+                        <span className="pr-2 text-lime-500">
                             <BiCheckCircle />
                         </span>
                     )}
                 </div>
                 {errors.firstName ? (
-                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                    <div className="h-4 pt-1 text-right text-xs text-red-400">
                         {errors.firstName.message}
                     </div>
                 ) : (
@@ -119,13 +119,13 @@ export default function EditProfileForm() {
                 </label>
 
                 <div
-                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.lastName ? ' border-red-400' : 'border-slate-200'}`}
+                    className={`flex items-center justify-between rounded-md border-[1px] bg-transparent px-0 py-0 text-sm ${errors.lastName ? 'border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
                         id="lastName"
                         placeholder="Doe"
-                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        className="w-full bg-transparent px-2 py-2 focus:outline-none"
                         {...register('lastName', {
                             required: {
                                 value: true,
@@ -134,13 +134,13 @@ export default function EditProfileForm() {
                         })}
                     />
                     {dirtyFields.lastName && !errors.lastName && (
-                        <span className="text-lime-500 pr-2">
+                        <span className="pr-2 text-lime-500">
                             <BiCheckCircle />
                         </span>
                     )}
                 </div>
                 {errors.lastName ? (
-                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                    <div className="h-4 pt-1 text-right text-xs text-red-400">
                         {errors.lastName.message}
                     </div>
                 ) : (
@@ -154,13 +154,13 @@ export default function EditProfileForm() {
                 </label>
 
                 <div
-                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.email ? ' border-red-400' : 'border-slate-200'}`}
+                    className={`flex items-center justify-between rounded-md border-[1px] bg-transparent px-0 py-0 text-sm ${errors.email ? 'border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="email"
                         id="email"
                         placeholder="email@email.com"
-                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        className="w-full bg-transparent px-2 py-2 focus:outline-none"
                         {...register('email', {
                             required: {
                                 value: true,
@@ -169,13 +169,13 @@ export default function EditProfileForm() {
                         })}
                     />
                     {dirtyFields.email && !errors.email && (
-                        <span className="text-lime-500 pr-2">
+                        <span className="pr-2 text-lime-500">
                             <BiCheckCircle />
                         </span>
                     )}
                 </div>
                 {errors.email ? (
-                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                    <div className="h-4 pt-1 text-right text-xs text-red-400">
                         {errors.email.message}
                     </div>
                 ) : (
@@ -189,13 +189,13 @@ export default function EditProfileForm() {
                 </label>
 
                 <div
-                    className={`rounded-md flex items-center justify-between border-[1px] py-0 px-0 text-sm bg-transparent ${errors.photo ? ' border-red-400' : 'border-slate-200'}`}
+                    className={`flex items-center justify-between rounded-md border-[1px] bg-transparent px-0 py-0 text-sm ${errors.photo ? 'border-red-400' : 'border-slate-200'}`}
                 >
                     <input
                         type="text"
                         id="photo"
                         placeholder="https://photo.jpg"
-                        className="w-full py-2 px-2 focus:outline-none bg-transparent"
+                        className="w-full bg-transparent px-2 py-2 focus:outline-none"
                         {...register('photo', {
                             required: {
                                 value: true,
@@ -204,13 +204,13 @@ export default function EditProfileForm() {
                         })}
                     />
                     {dirtyFields.photo && !errors.photo && (
-                        <span className="text-lime-500 pr-2">
+                        <span className="pr-2 text-lime-500">
                             <BiCheckCircle />
                         </span>
                     )}
                 </div>
                 {errors.photo ? (
-                    <div className="h-4 text-red-400 text-xs text-right pt-1">
+                    <div className="h-4 pt-1 text-right text-xs text-red-400">
                         {errors.photo.message}
                     </div>
                 ) : (
@@ -219,11 +219,11 @@ export default function EditProfileForm() {
             </div>
 
             <button
-                className="rounded-full bg-orange-400 text-blue-950 px-4 py-[.6rem] mt-4 font-semibold"
+                className="mt-4 rounded-full bg-orange-400 px-4 py-[.6rem] font-semibold text-blue-950"
                 onClick={goToProfile}
             >
                 Submit Data
             </button>
         </form>
-    )
+    );
 }

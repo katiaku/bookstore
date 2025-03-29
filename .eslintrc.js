@@ -17,7 +17,7 @@ export default {
             jsx: true,
         },
     },
-    plugins: ['react-refresh', '@typescript-eslint', 'react'],
+    plugins: ['react-refresh', '@typescript-eslint', 'react', 'prettier'],
     settings: {
         react: {
             version: 'detect',

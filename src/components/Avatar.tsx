@@ -1,20 +1,20 @@
-import { useNavigate } from 'react-router-dom'
-import { AvatarProps } from '../config/types'
-import blankProfilePicture from '../../public/img/blank_profile_picture.webp'
+import { useNavigate } from 'react-router-dom';
+import { AvatarProps } from '../config/types';
+import blankProfilePicture from '../../public/img/blank_profile_picture.webp';
 
 export default function Avatar({ user }: AvatarProps) {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     function goToProfile() {
-        navigate('/profile')
+        navigate('/profile');
     }
 
     return (
         <div
-            className="flex flex-col items-center ml-auto mr-4 md:mr-2 lg:mr-4 cursor-pointer"
+            className="ml-auto mr-4 flex cursor-pointer flex-col items-center md:mr-2 lg:mr-4"
             onClick={goToProfile}
         >
-            <div className="border border-white size-10 rounded-full overflow-hidden">
+            <div className="size-10 overflow-hidden rounded-full border border-white">
                 <img
                     className="size-full object-cover"
                     src={user.photo || blankProfilePicture}
@@ -22,5 +22,5 @@ export default function Avatar({ user }: AvatarProps) {
                 />
             </div>
         </div>
-    )
+    );
 }

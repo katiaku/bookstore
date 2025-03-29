@@ -1,10 +1,10 @@
-import LoginForm from '../components/forms/LoginForm'
-import bgImage from '../../public/img/bg-5.avif'
+import LoginForm from '../components/forms/LoginForm';
+import bgImage from '../../public/img/bg-5.avif';
 
 export default function LoginPage() {
     return (
-        <div className="relative bg-blue-950 page-height overflow-y-scroll">
-            <div className="w-full h-full overflow-hidden opacity-25">
+        <div className="page-height relative overflow-y-scroll bg-blue-950">
+            <div className="h-full w-full overflow-hidden opacity-25">
                 <img
                     className="h-full w-full object-cover"
                     src={bgImage}
@@ -12,8 +12,8 @@ export default function LoginPage() {
                 />
             </div>
 
-            <div className="absolute top-0 z-10 w-full h-full flex flex-col justify-center items-center">
-                <h1 className="text-white font-poppins text-center text-2xl mb-8 mx-8">
+            <div className="absolute top-0 z-10 flex h-full w-full flex-col items-center justify-center">
+                <h1 className="mx-8 mb-8 text-center font-poppins text-2xl text-white">
                     We've been missing you.
                     <br />
                     Log in to your{' '}
@@ -22,5 +22,5 @@ export default function LoginPage() {
                 <LoginForm />
             </div>
         </div>
-    )
+    );
 }
