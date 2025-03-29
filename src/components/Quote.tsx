@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
 type Quote = {
-    _id: string;
-    content: string;
+    // _id: string;
+    quote: string;
     author: string;
 };
 
@@ -13,7 +13,10 @@ export default function Quote() {
 
     async function getQuote() {
         try {
-            const resp = await fetch('https://api.quotable.io/quotes/random');
+            // const resp = await fetch('http://api.quotable.io/quotes/random'); <--- deprecated since 2024 (https certificate issue)
+            const resp = await fetch(
+                'https://api.breakingbadquotes.xyz/v1/quotes'
+            );
             const json = await resp.json();
             setQuotes(json);
         } catch (error) {
@@ -47,32 +50,32 @@ export default function Quote() {
 
     return (
         <div className="max-width-[100px] mx-4 cursor-default bg-transparent px-4 py-6 font-nunito text-base text-slate-100">
-            {quotes.map(quote => (
-                <div
-                    key={quote._id}
-                    className="align-center max-width-[100px] flex flex-col justify-start gap-4"
-                >
-                    <div className="relative flex gap-2">
-                        <span className="absolute -left-10 top-0 -mt-4 select-none text-[6rem] leading-none text-orange-400">
-                            “
-                        </span>
-                        <p>{quote.content}</p>
-                        <button onClick={() => handleCopy(quote.content)}>
-                            <a>
-                                <BiCopy className="cursor-pointer text-base text-white transition-all duration-300 ease-in-out hover:text-orange-400" />
-                            </a>
-                        </button>
-                    </div>
-                    <a
-                        href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(quote.author)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="self-end italic hover:underline"
-                    >
-                        - {quote.author}
-                    </a>
+            {/* {quotes.map(quote => ( */}
+            <div
+                // key={quote._id}
+                className="align-center max-width-[100px] flex flex-col justify-start gap-4"
+            >
+                <div className="relative flex gap-2">
+                    <span className="absolute -left-10 top-0 -mt-4 select-none text-[6rem] leading-none text-orange-400">
+                        “
+                    </span>
+                    <p>{quotes[0]?.quote}</p>
+                    <button onClick={() => handleCopy(quotes[0]?.quote)}>
+                        <a>
+                            <BiCopy className="cursor-pointer text-base text-white transition-all duration-300 ease-in-out hover:text-orange-400" />
+                        </a>
+                    </button>
                 </div>
-            ))}
+                <a
+                    href={`https://en.wikipedia.org/wiki/Special:Search?search=${encodeURIComponent(quotes[0]?.author)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="self-end italic hover:underline"
+                >
+                    - {quotes[0]?.author}
+                </a>
+            </div>
+            {/* ))} */}
         </div>
     );
 }
