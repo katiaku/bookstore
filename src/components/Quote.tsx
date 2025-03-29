@@ -10,6 +10,7 @@ export default function Quote() {
         try {
             // const resp = await fetch('http://api.quotable.io/quotes/random'); <--- deprecated since 2024 (https certificate issue)
             const resp = await fetch(
+                // TODO: use a different API as I am not sure if this one is appropriate
                 'https://api.breakingbadquotes.xyz/v1/quotes'
             );
             const json = await resp.json();
