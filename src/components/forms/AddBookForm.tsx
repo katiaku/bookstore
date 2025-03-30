@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import useUserContext from '../../hooks/useUserContext';
 import { useNavigate } from 'react-router-dom';
+import FormButton from '../ui/FormButton';
 
 type FormValues = {
     title: string;
@@ -247,10 +248,7 @@ export default function AddBookForm() {
                     <div className="h-4"></div>
                 )}
             </div>
-
-            <button className="mt-4 rounded-full bg-orange-400 px-4 py-[.6rem] font-semibold text-blue-950">
-                Submit Data
-            </button>
+            <FormButton onClick={handleSubmit(onSubmit)} label="Submit Data" />
         </form>
     );
 }
